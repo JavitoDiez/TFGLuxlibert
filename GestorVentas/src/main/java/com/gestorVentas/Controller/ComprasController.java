@@ -29,6 +29,7 @@ import com.gestorVentas.Servicio.ProveedoresService;
 @Controller
 public class ComprasController {
 
+	private static final ProductoEnt ProductoEnt = null;
 	@Autowired
 	private ComprasProductoService comprasProductoService;
 	@Autowired
@@ -103,6 +104,12 @@ public class ComprasController {
 		Proveedor proveedor = proveedoresService.findByName(nombreProveedor);
 
 		MateriaPrima materiaPrima = materiaPrimaService.findByName(nombreMateriaPrima);
+		
+		if(materiaPrima.getNombre().equals("Piel cocodrilo") ) {
+			
+			
+			
+		}
 		System.out.println("MATERIA PRIMA :"+ materiaPrima.toString());
 		
 		materiaPrima.setStock(cantidad + materiaPrima.getStock());
@@ -134,6 +141,7 @@ public class ComprasController {
 		return "registroCompra";
 	}
 
+	
 	@PostMapping("/compras/registroCompra")
 	public String añadirCarrito(@RequestParam("fechaCompra") Date fechaCompra,
 			@RequestParam("materiaPrima") String nombreMateriaPrima, @RequestParam("proveedor") String nombreProveedor,
@@ -156,6 +164,8 @@ public class ComprasController {
 
 		return "redirect:/compras/registroCompra";
 	}
+	
+	
 
 	@PostMapping("/compras")
 	public String busquedaCompras(@RequestParam("desde") Date desde, @RequestParam("hasta") Date hasta, Model model,
@@ -186,5 +196,13 @@ public class ComprasController {
 			return "redirect: /compras";
 		}
 
+	}
+	
+	public ProductoEnt editarStockProducto() {
+		
+		
+		
+		
+		return ProductoEnt;
 	}
 }

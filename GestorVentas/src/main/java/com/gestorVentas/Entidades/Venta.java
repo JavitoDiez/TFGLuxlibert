@@ -16,19 +16,23 @@ public class Venta {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="idVenta")
+	@Column(name="id_venta")
 	private int idVenta;
 	
-	@Column(name="importeVenta")
+	@Column(name="importe_venta")
 	private double importeVenta;
 	
-	@Column(name="fechaVenta")
+	@Column(name="fecha_venta")
 	private Date fechaVenta;
 	
+	@Column(name="cantidad_producto_vendido")
 	private int cantidadProductoVendido;
+	
+	
 	
 	@ManyToMany
 	@JoinTable(name="detalleventa",joinColumns = @JoinColumn(name="idVenta"),inverseJoinColumns = @JoinColumn(name="idProducto"))
 	private List<ProductoEnt> productosVendidos;
 	
+	private DetalleVenta detalleVenta;
 }
