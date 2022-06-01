@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head th:replace="layout/layout :: head">
+<meta charset="UTF-8">
+
+
+</head>
+<body id="body-pd">
+	<style>
+#boton {
+	background-color: #EEC373;
+}
+</style>
+
+	<div th:fragment="sidebar">
+		<header class="header" id="header">
+
+			<div class="header_toggle">
+				<i class='bx bx-menu' id="header-toggle"></i>
+			</div>
+			<h3 id="nombreMarca" class="text-center ">LUXLIBERT</h3>
+			<div class="header_img">
+				<img th:src="@{img/logoLuxlibert.jpeg}" alt="">
+			</div>
+		</header>
+		<div class="l-navbar" id="nav-bar">
+			<nav class="nav">
+				<div>
+					<a href="#" class="nav_logo"> <i
+						class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">LUXLIBERT</span>
+					</a>
+					<div class="nav_list">
+						<a href="/productos" class="nav_link active"> <i
+							class='bx bx-package'></i></i> <span class="nav_name">Productos</span>
+						</a> <a href="/proveedores" class="nav_link"> <i
+							class="fa fa-handshake-o" aria-hidden="true"></i> <span
+							class="nav_name">Proveedores</span>
+						</a> <a href="/ventas" class="nav_link"> <i class='bx bx-dollar'></i>
+							<span class="nav_name">Ventas</span>
+						</a> <a href="/compras" class="nav_link"> <i
+							class="fa fa-shopping-basket" aria-hidden="true"></i> <span
+							class="nav_name">Compras</span>
+						</a> <a href="/estadisticas" class="nav_link"> <i
+							class="fa fa-bar-chart" aria-hidden="true"></i> <span
+							class="nav_name">Estadísticas</span>
+						</a>
+					</div>
+				</div>
+				<a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i>
+					<span class="nav_name">SignOut</span>
+				</a>
+			</nav>
+		</div>
+	</div>
+
+	<section class="pt-5">
+		<div class="container pt-5">
+
+			<button id="boton" type="button" class="btn" data-bs-toggle="modal"
+				data-bs-target="#exampleModal">+ NUEVO PRODUCTO</button>
+
+			<button id="boton" type="button" class="btn" data-bs-toggle="modal"
+				data-bs-target="#modalCategoria">+ NUEVA CATEGORIA</button>
+
+
+
+			<a href="/productos/materiasPrimas" id="boton" type="button"
+				class="btn">MATERIAS PRIMAS</a>
+			<!-- IFRAME MATERIA PRIMA LISTADO -->
+
+
+			<!-- Modal -->
+
+
+			<!-- MODAL PRODUCTO -->
+
+			<div class="modal fade" id="exampleModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Agregar
+								Producto</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form class="form" th:object="${ProductoEnt}"
+								th:action="@{/productos}" method="post">
+								<div class="form-group mt-4">
+									<label for="exampleInputNombreProducto1">Nombre del
+										producto</label> <input type="text" class="form-control"
+										id="nombreProducto" aria-describedby="emailHelp"
+										name="nombreProducto" placeholder="Nombre del producto">
+
+								</div>
+								<div class="form-group mt-4">
+									<label for="labelDescripcion">Descripción</label>
+									<textarea class="form-control" id="descripcion"
+										name="descripcion" placeholder="Descripción del producto"></textarea>
+								</div>
+								<div class="form-group mt-4">
+									<label for="labelCategoria">Categoria</label> <select
+										name="categoria">
+										<option th:each="categoria : ${categorias}"
+											th:value="${categoria.categoria}"
+											th:text="${categoria.categoria}" th:selected="true" />
+									</select>
+								</div>
+								<div class="form-group mt-4">
+									<label for="labelPVP">PVP</label> <input type="text" name="pvp"
+										class="form-control" id="precioVenta">
+								</div>
+								<div class="form-group mt-4">
+									<button class="btn btn-success" type="submit">Agregar</button>
+								</div>
+
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">Close</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- MODAL CATEGORIA -->
+
+			<div class="modal fade" id="modalCategoria" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Agregar
+								Categoria</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form class="form" th:object="${CategoriaProducto}"
+								th:action="@{/categorias}" method="post">
+								<div class="form-group mt-4">
+									<label>Nombre Categoria</label> <input type="text"
+										name="nombreCategoria" class="form-control"
+										id="nombreCategoria">
+								</div>
+								<div class="form-group mt-4">
+									<button class="btn btn-success" type="submit">Agregar</button>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">Close</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-12 pt-5">
+					<table class="table table-stripped width-100">
+						<thead>
+							<tr>
+								<th scope="col">Nombre Producto</th>
+								<th scope="col">Categoria</th>
+								<th scope="col">Descripción</th>
+								<th scope="col">P.V.P</th>
+								<th scope="col">STOCK</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="producto : ${productos}">
+
+								<td th:text="${producto.nombreProducto}"></td>
+								<td th:text="${producto.categoriaProducto.categoria}"></td>
+								<td th:text="${producto.descripcion}"></td>
+								<td th:text="${producto.precioVenta}"></td>
+								<td th:text="${producto.stock}"></td>
+								<td><a
+									th:href="@{/productos/editar/} + ${producto.idProducto}"
+									class="btn btn-dark">EDITAR</a></td>
+								<td><a
+									th:href="@{/productos/eliminar/} + ${producto.idProducto}"
+									class="btn btn-dark">ELIMINAR</a></td>
+							</tr>
+
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<nav aria-label="pagination">
+								<ul class="pagination justify-content-center">
+									<li class="page-item" th:each="page : ${paginas}">
+										<a class="page-link" th:href="@{|/?page=${page}|}" th:text="${page}"></a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+
+</body>
+
+<!--Container Main end-->
+</html>
+

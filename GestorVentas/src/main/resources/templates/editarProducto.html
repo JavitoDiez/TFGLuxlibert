@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head th:replace="layout/layout :: head">
+<meta charset="UTF-8">
+
+
+</head>
+<body id="body-pd">
+<style>
+
+:root {
+    --header-height: 3rem;
+    --nav-width: 68px;
+    --first-color-black: #1B1A17;
+    --first-color-gold: #EEC373;
+    --white-color: #F7F6FB;
+    --body-font: 'Nunito', sans-serif;
+    --normal-font-size: 1rem;
+    --z-fixed: 100
+}
+
+.btn {
+	background-color: #EEC373;
+}
+
+.header_img {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden
+}
+.header {
+    width: 100%;
+    height: var(--header-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background-color: var(--first-color-black);
+    z-index: var(--z-fixed);
+    transition: .5s
+}
+.header_img {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden
+}
+
+.header_img img {
+    width: 40px
+}
+
+</style>
+
+	<header class="header bg-dark" id="header">
+		<h3 id="nombreMarca" style=" color:#EEC373;" class="text-center" >LUXLIBERT</h3>
+		<div class="header_img">
+			<img th:src="@{img/logoLuxlibert.jpeg}" alt="">
+		</div>
+	</header>
+
+
+	<div class="container pt-5">
+
+
+		<h3 class="text-center pt-2">EDITAR PRODUCTO</h3>
+
+		<div class="pt-2">
+			<a href="/productos" class="btn">Volver</a>
+		</div>
+		
+		<div class="pt-5 container">
+
+			<form class="form" th:object="${ProductoEnt}"
+				th:action="@{/productos/{idProducto}(idProducto=${productoModificar.idProducto})}"
+				method="post">
+				<div class="form-control mt-4">
+					<label for="exampleInputNombreProducto1">Nombre del
+						producto</label> <input type="text" class="form-control"
+						id="nombreProducto" aria-describedby="emailHelp"
+						name="nombreProducto"
+						th:value="${productoModificar.nombreProducto}">
+
+				</div>
+				<div class="form-control mt-4">
+					<label for="labelDescripcion">Descripción</label>
+					<textarea class="form-control" id="descripcion" name="descripcion"
+						placeholder="Descripción del producto"
+						th:text="${productoModificar.descripcion}"></textarea>
+				</div>
+				<div class="form-control mt-4">
+					<label for="labelCategoria">Categoria</label> <select
+						name="categoria">
+						<option
+							 th:text="${productoModificar.categoriaProducto.categoria}"
+							th:selected="true" />
+					</select>
+				</div>
+				<div class="form-group mt-4">
+					<label for="labelPVP">PVP</label> <input
+						th:value="${productoModificar.precioVenta}" type="text" name="pvp"
+						class="form-control" id="precioVenta">
+				</div>
+				<div class="form-group mt-4">
+					<button class="btn" type="submit">Modificar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+</body>
+</html>
+

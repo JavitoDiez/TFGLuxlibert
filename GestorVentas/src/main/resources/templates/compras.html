@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="master">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link rel="stylesheet" th:href="@{css/estilos.css}">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
+<script th:src="@{js/sidebar.js}"></script>
+<script src="@{js/modales.js}"></script>
+<script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css'
+	rel='stylesheet'>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+	integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+	crossorigin="anonymous">
+<style>
+#boton {
+	background-color: #EEC373;
+}
+</style>
+
+</head>
+<body id="body-pd">
+
+
+	<div th:fragment="sidebar">
+		<header th:fragment="header" class="header" id="header">
+			<div class="header_toggle">
+				<i class='bx bx-menu' id="header-toggle"></i>
+			</div>
+			<h3 id="nombreMarca" class="text-center ">LUXLIBERT</h3>
+			<div class="header_img">
+				<img th:src="@{img/logoLuxlibert.jpeg}" alt="">
+			</div>
+		</header>
+		<div class="l-navbar" id="nav-bar">
+			<nav class="nav">
+				<div>
+					<a href="#" class="nav_logo"> <i
+						class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">LUXLIBERT</span>
+					</a>
+					<div class="nav_list">
+						<a href="/productos" class="nav_link "> <i
+							class='bx bx-package'></i></i> <span class="nav_name">Productos</span>
+						</a> <a href="/proveedores" class="nav_link"> <i
+							class="fa fa-handshake-o" aria-hidden="true"></i> <span
+							class="nav_name">Proveedores</span>
+						</a> <a href="/ventas" class="nav_link"> <i class='bx bx-dollar'></i>
+							<span class="nav_name">Ventas</span>
+						</a> <a href="/compras" class="nav_link active"> <i
+							class="fa fa-shopping-basket" aria-hidden="true"></i> <span
+							class="nav_name">Compras</span>
+						</a> <a href="/estadisticas" class="nav_link"> <i
+							class="fa fa-bar-chart" aria-hidden="true"></i> <span
+							class="nav_name">Estadísticas</span>
+						</a>
+					</div>
+				</div>
+				<a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i>
+					<span class="nav_name">SignOut</span>
+				</a>
+			</nav>
+		</div>
+	</div>
+
+
+
+	<section class="pt-5">
+		<div class="container pt-5">
+
+
+
+			<div class="container pt-4 ">
+				<div class="row">
+					<div class="text-center">
+						<form th:action="@{/compras}" method="post">
+							<div>
+								<label>Desde</label> <input type="date" th:name="desde" required />
+								<label>Hasta</label> <input type="date" th:name="hasta" required />
+								<button type="submit" id="boton" class="btn">Buscar</button>
+								<a href="/compras" id="boton" class="btn" style="float: right;">Limpiar
+									Filtro</a>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+			<label th:text="${mensajeResultadoBueno}" class="bg-success">
+
+			</label> <label th:text="${mensajeResultadoMalo}" class="bg-danger">
+
+			</label>
+
+			<div></div>
+
+			<div class="row">
+				<div class="col-12 pt-5">
+					<table class="table table-stripped width-100">
+						<thead>
+							<tr>
+								<th scope="col">ID COMPRA</th>
+								<th scope="col">FECHA COMPRA</th>
+								<th scope="col">PRODUCTO</th>
+								<th scope="col">PROVEEDOR</th>
+								<th scope="col">CANTIDAD</th>
+								<th scope="col">IMPORTE</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="compra : ${compras}">
+
+								<td th:text="${compra.idCompra}"></td>
+								<td th:text="${compra.fechaCompra}"></td>
+								<td th:text="${compra.materiaPrima.nombre}"></td>
+								<td th:text="${compra.proveedor.nombreProveedor}"></td>
+								<td th:text="${compra.cantidad}">/uds</td>
+								<td th:text="${compra.importeCompra}">$</td>
+							</tr>
+						</tbody>
+					</table>
+					<!--<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<nav aria-label="pagination">
+
+								<span th:each="i: ${#numbers.sequence(1, totalPages)}"> <a
+									th:href="@{'/compras/page/' + ${i}}">[[${i}]]</a> &nbsp; &nbsp;
+								</span>
+								<li class="page-item" th:each="pageCompra : ${paginasCompras}">
+										<a class="page-link" th:href="@{'compras/page/' + ${pageCompra}}"
+										th:text="${pageCompra}"></a>
+									</li>
+
+							</nav>
+						</div>-->
+						<div class="col-md-2"></div>
+					</div>
+				</div>
+			</div>
+			<button id="boton" type="button" class="btn" data-bs-toggle="modal"
+				data-bs-target="#exampleModal" style="float: right; padding-left: 25px">REGISTRAR
+				COMPRA</button>
+
+		</div>
+	</section>
+
+
+
+	<!-- <a href="/compras/registroCompra">Registro de compra múltiple</a>
+			 MODAL PRODUCTO -->
+
+	<div class="modal fade" id="exampleModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Agregar
+						Producto</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form class="form" th:object="${Compra}"
+						th:action="@{/realizarCompra}" method="post">
+						<div class="form-group mt-4">
+							<label for="exampleInputNombreProducto1">Fecha de la
+								compra </label> <input type="date" class="form-control" id="fechaCompra"
+								aria-describedby="emailHelp" name="fechaCompra" required>
+						</div>
+
+						<div class="form-group mt-4">
+							<label for="labelCategoria">Selecciona la materia prima que
+								deseas comprar:</label> <select name="materiaPrima" required>
+								<option th:each="materiaPrima : ${materiasPrimas}"
+									th:value="${materiaPrima.nombre}"
+									th:text="${materiaPrima.nombre}" th:selected="true" />
+							</select>
+						</div>
+
+						<div class="form-group mt-4">
+							<label for="labelCategoria">Selecciona el proveedor:</label> <select
+								name="proveedor" required>
+								<option th:each="proveedor : ${proveedores}"
+									th:value="${proveedor.nombreProveedor}"
+									th:text="${proveedor.nombreProveedor}" th:selected="true" />
+							</select>
+						</div>
+						<div class="form-group mt-4">
+							<label for="labelPVP">Selecciona la cantidad que deseas
+								comprar: </label> <input type="number" name="cantidad"
+								class="form-control" id="cantidad" required>
+						</div>
+
+						<div class="form-group mt-4">
+							<label for="labelPVP">Indica el importe de la compra: </label> <input
+								type="text" name="importe" class="form-control" id="importe"
+								required>
+						</div>
+
+						<div class="form-group mt-4">
+							<button class="btn btn-success" type="submit">Agregar</button>
+						</div>
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+<!--Container Main end-->
+</html>
+
