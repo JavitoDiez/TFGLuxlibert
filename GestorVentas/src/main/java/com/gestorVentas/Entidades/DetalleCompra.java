@@ -1,5 +1,6 @@
 package com.gestorVentas.Entidades;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -23,6 +24,8 @@ public class DetalleCompra {
 	@Column(name="id_detalle_compra")
 	private int idDetalleCompra;
 	
+
+
 	@ManyToOne
 	@JoinColumn(name="id_producto_pk",nullable=false)
 	@NotNull(message = "Selecciona la categoria del producto")
@@ -34,10 +37,23 @@ public class DetalleCompra {
 	@NotNull(message = "Selecciona la categoria del producto")
 	private Proveedor listaProveedores;
 	
-	@OneToOne
+	@Column(name="fecha_compra")
+	@NotNull(message="Debes seleccionar la fecha de compra")
+	private Date fechaCompra;
+	
+	@Column(name="importe_compra")
+	@NotNull(message="Debes especificar el importe de la compra")
+	private double importeCompra;
+
+	
+	@Column(name="cantidad_producto")
+	@NotNull(message = "Debes especificar la cantidad")
+	private int cantidad;
+	
+	/*@OneToOne
 	@JoinColumn(name="id_compra",nullable=false)
 	@NotNull(message = "Selecciona la categoria del producto")
-	private Compra compra;
+	private Compra compra;*/
 
 	public int getIdDetalleCompra() {
 		return idDetalleCompra;
@@ -63,18 +79,43 @@ public class DetalleCompra {
 		this.listaProveedores = listaProveedores;
 	}
 
-	public Compra getCompra() {
+	
+	
+	public Date getFechaCompra() {
+		return fechaCompra;
+	}
+
+	public void setFechaCompra(java.util.Date date) {
+		this.fechaCompra = date;
+	}
+
+	public double getImporteCompra() {
+		return importeCompra;
+	}
+
+	public void setImporteCompra(double importeCompra) {
+		this.importeCompra = importeCompra;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+	/*public Compra getCompra() {
 		return compra;
 	}
 
 	public void setCompra(Compra compra) {
 		this.compra = compra;
-	}
+	}*/
 
 	@Override
 	public String toString() {
 		return "DetalleCompra [idDetalleCompra=" + idDetalleCompra + ", listaProductos=" + listaProductos
-				+ ", listaProveedores=" + listaProveedores + ", compra=" + compra + "]";
+				+ ", listaProveedores=" + listaProveedores+"]";
 	}
 	
 	

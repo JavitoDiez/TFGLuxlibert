@@ -178,7 +178,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>index</td>
+						<td></td>
 						<td>
 							<table class="table table-bordered pt-4">
 								<thead>
@@ -192,7 +192,7 @@
 								<tbody>
 									<tr th:each="carrito, iterador : ${carrito}">
 										<td th:text="${iterador.index}"></td>
-										<td th:text="Artículos"></td>
+										
 										<td th:text="${carrito.productoEnt.nombreProducto}"></td>
 										<td th:text="${carrito.proveedor.nombreProveedor}"></td>
 										<td th:text="${carrito.cantidad}"></td>

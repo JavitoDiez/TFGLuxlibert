@@ -142,8 +142,11 @@ public class ComprasController {
 		productoCarrito.setImporte(importeCompra);*/
 		
 		carrito.add(new CarritoCompras(producto,cantidad,proveedor,fechaCompra,importeCompra));
+		
 		System.out.println("carrito"+ request.getAttribute("carrito"));
+		
 		request.setAttribute("carrito", carrito);
+		
 		//model.addAttribute("carrito", carrito);
 
 		this.rellenarCombos(model);
@@ -237,18 +240,20 @@ public class ComprasController {
 		
 		ArrayList<CarritoCompras> carrito = (ArrayList<CarritoCompras>) sesion.getAttribute("carrito");	
 		
-		DetalleCompra detalleCompra = new DetalleCompra();
+		
 		
 		for (CarritoCompras carritoCompras : carrito) {
 			Double importeCompra = carritoCompras.getImporte()+ carritoCompras.getImporte();
-			Compra compra = new Compra();
-			compra.setImporteCompra(importeCompra);
-			
-			detalleCompra.setCompra(compra);
+			//Compra compra = new Compra();
+			//compra.setImporteCompra(importeCompra);
+			DetalleCompra detalleCompra = new DetalleCompra();
+			//detalleCompra.setCompra(compra);
 			//detalleCompra.setCompra(carritoCompras.)
 			detalleCompra.setListaProductos(carritoCompras.getProductoEnt());
 			detalleCompra.setListaProveedores(carritoCompras.getProveedor());
-			
+			detalleCompra.setFechaCompra(carritoCompras.getFecha());
+			detalleCompra.setImporteCompra(carritoCompras.getImporte());
+			System.out.println(detalleCompra.toString());
 		}
 		
 		
