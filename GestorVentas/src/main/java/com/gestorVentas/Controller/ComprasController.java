@@ -1,5 +1,6 @@
 package com.gestorVentas.Controller;
 
+import java.lang.reflect.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -234,6 +235,21 @@ public class ComprasController {
 		
 		System.out.println("Carrito de compra"+ sesion.getAttribute("carrito") );
 		
+		ArrayList<CarritoCompras> carrito = (ArrayList<CarritoCompras>) sesion.getAttribute("carrito");	
+		
+		DetalleCompra detalleCompra = new DetalleCompra();
+		
+		for (CarritoCompras carritoCompras : carrito) {
+			Double importeCompra = carritoCompras.getImporte()+ carritoCompras.getImporte();
+			Compra compra = new Compra();
+			compra.setImporteCompra(importeCompra);
+			
+			detalleCompra.setCompra(compra);
+			//detalleCompra.setCompra(carritoCompras.)
+			detalleCompra.setListaProductos(carritoCompras.getProductoEnt());
+			detalleCompra.setListaProveedores(carritoCompras.getProveedor());
+			
+		}
 		
 		
 		return "redirect:/compras/registroCompra";

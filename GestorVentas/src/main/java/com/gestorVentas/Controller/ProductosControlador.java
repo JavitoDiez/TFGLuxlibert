@@ -108,7 +108,7 @@ public class ProductosControlador extends HttpServlet{
 				return "productos";
 	}
 	
-	@GetMapping("/" )
+	@GetMapping("/")
 	public String listadoProductosPaginación (@RequestParam Map<String,Object> params,Model model) {
 		
 		//CONDICIONAL 

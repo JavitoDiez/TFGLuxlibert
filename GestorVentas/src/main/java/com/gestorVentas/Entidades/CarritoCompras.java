@@ -67,6 +67,12 @@ public class CarritoCompras {
 	public CarritoCompras() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "CarritoCompras [productoEnt=" + productoEnt + ", Cantidad=" + Cantidad + ", proveedor=" + proveedor
+				+ ", fecha=" + fecha + ", importe=" + importe + "]";
+	}
 	
 	
 	
