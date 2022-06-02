@@ -15,7 +15,7 @@ public class Proveedor {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_Proveedor")
+	@Column(name="id_proveedor")
 	private int idProveedor;
 	
 	@Column(name="nombre_proveedor")

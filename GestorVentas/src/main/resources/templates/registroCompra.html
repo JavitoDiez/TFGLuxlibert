@@ -43,10 +43,55 @@
 #boton {
 	background-color: #EEC373;
 }
+
+.header_img {
+	width: 35px;
+	height: 35px;
+	display: flex;
+	justify-content: center;
+	border-radius: 50%;
+	overflow: hidden
+}
+
+.header {
+	width: 100%;
+	height: var(- -header-height);
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1rem;
+	background-color: var(- -first-color-black);
+	z-index: var(- -z-fixed);
+	transition: .5s
+}
+
+.header_img {
+	width: 35px;
+	height: 35px;
+	display: flex;
+	justify-content: center;
+	border-radius: 50%;
+	overflow: hidden
+}
+
+.header_img img {
+	width: 40px
+}
 </style>
 
 </head>
 <body>
+
+	<header class="header bg-dark" id="header">
+		<h3 id="nombreMarca" style="color: #EEC373;" class="text-center">LUXLIBERT</h3>
+		<div class="header_img">
+			<img th:src="@{img/logoLuxlibert.jpeg}" alt="">
+		</div>
+	</header>
+
 	<div class="container pt-5">
 
 		<button id="boton" type="button" class="btn" data-bs-toggle="modal"
@@ -68,7 +113,8 @@
 					</div>
 					<div class="modal-body">
 						<form class="form" th:object="${Compra}"
-							th:action="@{/compras/registroCompra}" method="post">
+							th:action="@{/compras/registroCompra/añadirCarrito}"
+							method="post">
 							<div class="form-group mt-4">
 								<label for="exampleInputNombreProducto1">Fecha de la
 									compra </label> <input type="date" class="form-control"
@@ -78,10 +124,10 @@
 
 							<div class="form-group mt-4">
 								<label for="labelCategoria">Selecciona el producto que
-									deseas comprar:</label> <select name="materiaPrima">
-									<option th:each="materiaPrima : ${materiasPrimas}"
-										th:value="${materiaPrima.nombre}"
-										th:text="${materiaPrima.nombre}" th:selected="true" />
+									deseas comprar:</label> <select name="producto">
+									<option th:each="producto : ${productos}"
+										th:value="${producto.nombreProducto}"
+										th:text="${producto.nombreProducto}" th:selected="true" />
 								</select>
 							</div>
 
@@ -120,50 +166,49 @@
 		</div>
 	</div>
 
+	<div class="container pt-5">
 
-	<div class="table-responsive">
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>Item</th>
-					<th>Articulos</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="carrito, iterador : ${carritoCompra}">
-					<td th:text="${iterador.index}"></td>
-					<td th:text="Artículos"></td>
-					<td th:text="${carrito.compra.materiaPrima.nombre}"></td>
-					<td th:text="${carrito.compra.proveedor.nombre}"></td>
-					<td th:text="${carrito.compra.cantidad}"></td>
-					<td th:text="${carrito.compra.importeCompra}"></td>
-					
-						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<th>Producto</th>
-									<th>Proveedor</th>
-									<th>Cantidad</th>
-									<th>Importe</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-
-								</tr>
-
-
-							</tbody>
-
-
-						</table>
-
-					</td>
-					
-				</tr>
-			</tbody>
-		</table>
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Item</th>
+						<th>Articulos</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>index</td>
+						<td>
+							<table class="table table-bordered pt-4">
+								<thead>
+									<tr>
+										<th>Producto</th>
+										<th>Proveedor</th>
+										<th>Cantidad</th>
+										<th>Importe</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="carrito, iterador : ${carrito}">
+										<td th:text="${iterador.index}"></td>
+										<td th:text="Artículos"></td>
+										<td th:text="${carrito.productoEnt.nombreProducto}"></td>
+										<td th:text="${carrito.proveedor.nombreProveedor}"></td>
+										<td th:text="${carrito.cantidad}"></td>
+										<td th:text="${carrito.importe}"></td>
+										<td th:text="${carrito.fecha}"></td>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-
+	
+		<form class="form" th:action="@{/compras/compraRealizada}" th:object="${CarritoCompras}" method="post">
+			<button type="submit" class="btn" id="boton" >REGISTRAR COMPRA</button>
+		</form>
 </body>
 </html>

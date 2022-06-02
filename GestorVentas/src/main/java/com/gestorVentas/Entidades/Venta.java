@@ -1,14 +1,9 @@
 package com.gestorVentas.Entidades;
 
-import javax.persistence.Column;
-
 import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
 
 @Entity
 @Table(name="ventas")
@@ -30,9 +25,11 @@ public class Venta {
 	
 	
 	
-	@ManyToMany
+	/*@ManyToMany
 	@JoinTable(name="detalleventa",joinColumns = @JoinColumn(name="idVenta"),inverseJoinColumns = @JoinColumn(name="idProducto"))
-	private List<ProductoEnt> productosVendidos;
+	private List<ProductoEnt> productosVendidos;*/
 	
+	@OneToOne
+	@JoinColumn(name="idDetalleVenta")
 	private DetalleVenta detalleVenta;
 }

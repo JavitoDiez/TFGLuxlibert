@@ -13,7 +13,7 @@ import org.springframework.lang.NonNull;
 public class Compra {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_Compra")
 	private int idCompra;
 	
@@ -22,7 +22,7 @@ public class Compra {
 	private int cantidad;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	/*@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "id_materia_prima", nullable = false)
 	@NotNull(message="Debes seleccionar el nombre del producto")
 	private MateriaPrima  materiaPrima;
@@ -31,7 +31,7 @@ public class Compra {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "id_proveedor", nullable = false)
 	@NotNull(message="Debes seleccionar el nombre del producto")
-	private Proveedor proveedor;
+	private Proveedor proveedor;*/
 	
 	
 	
@@ -42,10 +42,40 @@ public class Compra {
 	@Column(name="fecha_compra")
 	@NotNull(message="Debes seleccionar la fecha de compra")
 	private Date fechaCompra;
+	
+	
+	@OneToOne
+	@JoinColumn(name = "id_detalle_compra")
+	private DetalleCompra detalleCompra;
 
 	
 	
-	public Compra(int cantidad, MateriaPrima materiaPrima, Proveedor proveedor, double importeCompra,
+	public DetalleCompra getDetalleCompra() {
+		return detalleCompra;
+	}
+
+
+
+	public void setDetalleCompra(DetalleCompra detalleCompra) {
+		this.detalleCompra = detalleCompra;
+	}
+
+
+
+	public Compra(int idCompra, @NotNull(message = "Debes especificar la cantidad") int cantidad,
+			@NotNull(message = "Debes especificar el importe de la compra") double importeCompra,
+			@NotNull(message = "Debes seleccionar la fecha de compra") Date fechaCompra, DetalleCompra detalleCompra) {
+		super();
+		this.idCompra = idCompra;
+		this.cantidad = cantidad;
+		this.importeCompra = importeCompra;
+		this.fechaCompra = fechaCompra;
+		this.detalleCompra = detalleCompra;
+	}
+
+
+
+	/*public Compra(int cantidad, MateriaPrima materiaPrima, Proveedor proveedor, double importeCompra,
 			Date fechaCompra) {
 		super();
 		this.cantidad = cantidad;
@@ -53,6 +83,18 @@ public class Compra {
 		this.proveedor = proveedor;
 		this.importeCompra = importeCompra;
 		this.fechaCompra = fechaCompra;
+	}*/
+
+
+
+	public Compra(@NotNull(message = "Debes especificar la cantidad") int cantidad,
+			@NotNull(message = "Debes especificar el importe de la compra") double importeCompra,
+			@NotNull(message = "Debes seleccionar la fecha de compra") Date fechaCompra, DetalleCompra detalleCompra) {
+		super();
+		this.cantidad = cantidad;
+		this.importeCompra = importeCompra;
+		this.fechaCompra = fechaCompra;
+		this.detalleCompra = detalleCompra;
 	}
 
 
@@ -93,7 +135,7 @@ public class Compra {
 
 
 
-	public MateriaPrima getMateriaPrima() {
+	/*public MateriaPrima getMateriaPrima() {
 		return materiaPrima;
 	}
 
@@ -114,7 +156,7 @@ public class Compra {
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
 	}
-
+*/
 
 
 	public double getImporteCompra() {
@@ -129,24 +171,16 @@ public class Compra {
 
 
 
-	public Compra(int cantidad, MateriaPrima materiaPrima, Proveedor proveedor, double importeCompra) {
-		super();
-		this.cantidad = cantidad;
-		this.materiaPrima = materiaPrima;
-		this.proveedor = proveedor;
-		this.importeCompra = importeCompra;
-	}
+	
 
-
-
-	public Compra(int idCompra, int cantidad, MateriaPrima materiaPrima, Proveedor proveedor, double importeCompra) {
+	/*public Compra(int idCompra, int cantidad, MateriaPrima materiaPrima, Proveedor proveedor, double importeCompra) {
 		super();
 		this.idCompra = idCompra;
 		this.cantidad = cantidad;
 		this.materiaPrima = materiaPrima;
 		this.proveedor = proveedor;
 		this.importeCompra = importeCompra;
-	}
+	}*/
 
 
 

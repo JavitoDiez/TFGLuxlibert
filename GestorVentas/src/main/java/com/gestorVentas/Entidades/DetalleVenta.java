@@ -21,6 +21,7 @@ public class DetalleVenta {
 	@JoinColumn(name="idVenta")
 	private Venta venta;
 
+	
 	public int getIdDetalleVenta() {
 		return idDetalleVenta;
 	}

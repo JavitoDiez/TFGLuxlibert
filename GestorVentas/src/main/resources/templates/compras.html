@@ -110,7 +110,9 @@
 									Filtro</a>
 							</div>
 						</form>
-
+						<a href="/compras/registroCompra" class="btn" id="boton"
+							style="text-align: center;float:left; padding-left: 25px">REGISTRAR
+							COMPRA </a>
 					</div>
 				</div>
 			</div>
@@ -162,15 +164,18 @@
 
 							</nav>
 						</div>-->
-						<div class="col-md-2"></div>
-					</div>
+					<div class="col-md-2"></div>
 				</div>
 			</div>
-			<button id="boton" type="button" class="btn" data-bs-toggle="modal"
+		</div>
+		<!--  <button id="boton" type="button" class="btn" data-bs-toggle="modal"
 				data-bs-target="#exampleModal" style="float: right; padding-left: 25px">REGISTRAR
-				COMPRA</button>
+				COMPRA</button>-->
+
+
 
 		</div>
+
 	</section>
 
 
@@ -198,11 +203,11 @@
 						</div>
 
 						<div class="form-group mt-4">
-							<label for="labelCategoria">Selecciona la materia prima que
-								deseas comprar:</label> <select name="materiaPrima" required>
-								<option th:each="materiaPrima : ${materiasPrimas}"
-									th:value="${materiaPrima.nombre}"
-									th:text="${materiaPrima.nombre}" th:selected="true" />
+							<label for="labelCategoria">Selecciona el producto que
+								deseas :</label> <select name="materiaPrima" required>
+								<option th:each="producto : ${productos}"
+									th:value="${producto.nombreProducto}"
+									th:text="${producto.nombreProducto}" th:selected="true" />
 							</select>
 						</div>
 
