@@ -150,7 +150,10 @@ public class ProductosControlador extends HttpServlet{
 		Double precioVenta = Double.parseDouble(pvp);
 		CategoriaProducto categoriaObj = categoriaProductoService.findByName(categoria);
 		
-		ProductoEnt producto = new ProductoEnt(nombreProducto,descripcion,categoriaObj,precioVenta);
+		//EL PRECIO DE COMPRA ES UN 20% MENOS QUE EL DE VENTA
+		float precioCompra = (float) (precioVenta * 0.80);
+		
+		ProductoEnt producto = new ProductoEnt(nombreProducto,descripcion,categoriaObj,precioVenta,precioCompra);
 		System.out.println(producto.toString());
 		productoService.insertarProducto(producto);
 		

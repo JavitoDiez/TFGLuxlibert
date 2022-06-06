@@ -228,8 +228,7 @@ public class ComprasController {
 		try {
 			
 			if (carrito.isEmpty() == true) {
-				
-				
+								
 				return "redirect:/compras/registroCompra";
 				
 			} else {
@@ -242,11 +241,13 @@ public class ComprasController {
 				
 					DetalleCompra detalleCompra = new DetalleCompra();
 				
+					ProductoEnt producto = carritoCompras.getProductoEnt();
+					
 					detalleCompra.setProductos(carritoCompras.getProductoEnt());
 					detalleCompra.setProveedores(carritoCompras.getProveedor());
 					detalleCompra.setFechaCompra(carritoCompras.getFecha());
 					detalleCompra.setCantidad(carritoCompras.getCantidad());
-					detalleCompra.setImporteCompra(carritoCompras.getImporte());
+					detalleCompra.setImporteCompra(producto.getPrecioCompra()*carritoCompras.getCantidad());
 					System.out.println(detalleCompra.toString());
 
 					// IMPORTE TOTAL
@@ -261,7 +262,7 @@ public class ComprasController {
 
 					System.out.println(detalle.toString());
 					
-					ProductoEnt producto = carritoCompras.getProductoEnt();
+					
 					
 					producto.setStock(producto.getStock()+ carritoCompras.getCantidad());
 					productoService.actualizarProducto(producto);

@@ -1,7 +1,6 @@
 package com.gestorVentas.Entidades;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.*;
 
 
@@ -32,6 +31,9 @@ public class ProductoEnt {
 	@Min(value = 0, message = "El precio mínimo es 0")
 	private double precioVenta;
 	
+	@Column(name="precio_compra")
+	private float precioCompra;
+	
 	@Column(name="stock",nullable=true)
 	private int stock;
 
@@ -45,6 +47,16 @@ public class ProductoEnt {
 
 	public String getNombreProducto() {
 		return nombreProducto;
+	}
+
+	
+
+	public double getPrecioCompra() {
+		return precioCompra;
+	}
+
+	public void setPrecioCompra(float precioCompra) {
+		this.precioCompra = precioCompra;
 	}
 
 	public void setNombreProducto(String nombreProducto) {
@@ -101,12 +113,13 @@ public class ProductoEnt {
 	
 
 	public ProductoEnt(String nombreProducto, String descripcion, CategoriaProducto categoriaProducto,
-			double precioVenta) {
+			double precioVenta, float precioCompra) {
 		super();
 		this.nombreProducto = nombreProducto;
 		this.descripcion = descripcion;
 		this.categoriaProducto = categoriaProducto;
 		this.precioVenta = precioVenta;
+		this.precioCompra = precioCompra;
 	}
 
 	public ProductoEnt(String nombreProducto, String descripcion, CategoriaProducto categoriaProducto,
