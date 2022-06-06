@@ -207,6 +207,26 @@
 				</tbody>
 			</table>
 		</div>
+		<br>
+		<!--  <div class="container alert alert-danger"
+			th:if="${carritoPrueba == null}">Debes añadir elementos al
+			carrito antes de registrar la compra</div>-->
+
+		<div class="alert alert-warning alert-dismissible fade show"
+			role="alert" th:if="${carrito == null}">
+			<strong>!Cuidado!</strong> Debes añadir un producto
+			<button type="button" class="btn-close" data-bs-dismiss="alert"
+				aria-label="Close"></button>
+		</div>
+
+		<div class="alert alert-success alert-dismissible fade show"
+			role="alert" th:if="${carrito != null}">
+			!Agregado correctamente!
+			<button type="button" class="btn-close" data-bs-dismiss="alert"
+				aria-label="Close"></button>
+		</div>
+
+		<br>
 		<form class="form" th:action="@{/compras/compraRealizada}"
 			th:object="${CarritoCompras}" method="post">
 			<button type="submit" class="btn text-center" id="boton">REGISTRAR

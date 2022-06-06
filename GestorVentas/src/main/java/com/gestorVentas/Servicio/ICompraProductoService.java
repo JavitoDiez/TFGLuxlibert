@@ -12,12 +12,12 @@ public interface ICompraProductoService {
 
 	
 	public List<Compra>findAll();
-	public List<Compra>findAllLimitFive();
+
 	
 	public Page<Compra>findAll (int pageNumber);
 	
 	public Compra realizarCompra(Compra compra);
 	
-	public List<Compra> findByRangeDate(Date desde, Date hasta);
+	
 	
 }

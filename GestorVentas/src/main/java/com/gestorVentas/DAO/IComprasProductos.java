@@ -15,10 +15,6 @@ import com.gestorVentas.Entidades.Compra;
 @Repository
 public interface IComprasProductos extends JpaRepository<Compra, Integer>{
 
-	@Query(value="SELECT * FROM compras where fecha_compra BETWEEN :desde AND :hasta ",nativeQuery = true)
-	public List<Compra> findByRangeDate(@Param("desde") Date desde,@Param("hasta") Date hasta );
 	
-	@Query(value="SELECT * FROM compras ORDER BY fecha_compra DESC LIMIT 5",nativeQuery = true)
-	public List<Compra> findAllLimitFive();
 	
 }

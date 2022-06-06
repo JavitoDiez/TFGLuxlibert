@@ -33,11 +33,7 @@ public class ComprasProductoService implements ICompraProductoService {
 		return compraRepository.save(compra);
 	}
 
-	@Override
-	public List<Compra> findByRangeDate(Date desde, Date hasta) {
-		
-		return compraRepository.findByRangeDate(desde, hasta);
-	}
+	
 
 	@Override
 	public Page<Compra> findAll(int pageNumber) {
@@ -45,10 +41,6 @@ public class ComprasProductoService implements ICompraProductoService {
 		return compraRepository.findAll(pageable);
 	}
 
-	@Override
-	public List<Compra> findAllLimitFive() {
-		// TODO Auto-generated method stub
-		return compraRepository.findAllLimitFive();
-	}
+
 
 }

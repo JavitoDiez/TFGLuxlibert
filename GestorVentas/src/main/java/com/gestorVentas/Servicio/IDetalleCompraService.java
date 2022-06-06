@@ -1,5 +1,6 @@
 package com.gestorVentas.Servicio;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,5 +16,8 @@ public interface IDetalleCompraService {
 	
 	public Optional<DetalleCompra> findById(int idDetalleCompra);
 	
+	public List<DetalleCompra> findByRangeDate(Date desde, Date hasta);
+	
+	public List<DetalleCompra> findAllLimitFive();
 
 }

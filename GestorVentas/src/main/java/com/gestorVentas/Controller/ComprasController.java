@@ -2,7 +2,7 @@ package com.gestorVentas.Controller;
 
 import java.lang.reflect.Array;
 import java.sql.Date;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -44,17 +44,15 @@ public class ComprasController {
 
 	@Autowired
 	private ProductoService productoService;
-	
+
 	@Autowired
 	private DetalleCompraService detalleService;
 
 	@GetMapping("/compras")
 	public String listadoComprasPrincipal(Model model) {
 
-		
-		
-		model.addAttribute("compras", detalleService.findAll());
-		
+		model.addAttribute("compras", detalleService.findAllLimitFive());
+
 		this.rellenarCombos(model);
 
 		return "compras";
@@ -123,37 +121,25 @@ public class ComprasController {
 	@PostMapping("/compras/registroCompra/añadirCarrito")
 	public String añadirCarrito(@RequestParam("fechaCompra") Date fechaCompra,
 			@RequestParam("producto") String nombreProducto, @RequestParam("proveedor") String nombreProveedor,
-			@RequestParam("cantidad") int cantidad, @RequestParam("importe") String importe, Model model,HttpServletRequest request,HttpSession session) {
+			@RequestParam("cantidad") int cantidad, @RequestParam("importe") String importe, Model model,
+			HttpServletRequest request, HttpSession session) {
 
 		Double importeCompra = Double.parseDouble(importe);
-		
-		ArrayList<CarritoCompras> carrito = (ArrayList<CarritoCompras>) session.getAttribute("carrito");
-		
-		
-		
+
+		List<CarritoCompras> carrito = (List<CarritoCompras>) session.getAttribute("carrito");
+
 		Proveedor proveedor = proveedoresService.findByName(nombreProveedor);
 
 		ProductoEnt producto = productoService.findByName(nombreProducto);
 
 		System.out.println("MATERIA PRIMA :" + producto.toString());
 
-		//ArrayList<CarritoCompras> carritoProductos = new ArrayList<>();
+		carrito.add(new CarritoCompras(producto, cantidad, proveedor, fechaCompra, importeCompra));
 
-		/*CarritoCompras productoCarrito = new CarritoCompras();
+		System.out.println("carrito" + request.getAttribute("carrito"));
 
-		productoCarrito.setCantidad(cantidad);
-		productoCarrito.setProductoEnt(producto);
-		productoCarrito.setProveedor(proveedor);
-		productoCarrito.setFecha(fechaCompra);
-		productoCarrito.setImporte(importeCompra);*/
-		
-		carrito.add(new CarritoCompras(producto,cantidad,proveedor,fechaCompra,importeCompra));
-		
-		System.out.println("carrito"+ request.getAttribute("carrito"));
-		
 		request.setAttribute("carrito", carrito);
-		
-		//model.addAttribute("carrito", carrito);
+
 
 		this.rellenarCombos(model);
 
@@ -161,23 +147,11 @@ public class ComprasController {
 	}
 
 	@GetMapping("/compras/registroCompra")
-	public String carritoCompras(Model model,HttpServletRequest request, HttpSession sesion) {
+	public String carritoCompras(Model model, HttpServletRequest request, HttpSession sesion) {
 
-		
 		sesion.setAttribute("carrito", new ArrayList<CarritoCompras>());
-		
+
 		this.rellenarCombos(model);
-		
-		/*List<Compra> listadoCompras = comprasProductoService.findAll();
-		model.addAttribute("compras", listadoCompras);
-		System.out.println(listadoCompras);
-
-		List<ProductoEnt> listadoProductos = productoService.findAll();
-
-		model.addAttribute("productos", listadoProductos);
-
-		List<Proveedor> listadoProveedores = proveedoresService.findAll();
-		model.addAttribute("proveedores", listadoProveedores);*/
 
 		return "registroCompra";
 	}
@@ -189,16 +163,17 @@ public class ComprasController {
 		try {
 			if (hasta != null && desde != null) {
 
-				List<Compra> comprasEncontradas = comprasProductoService.findByRangeDate(desde, hasta);
+				List<DetalleCompra> comprasEncontradas = detalleService.findByRangeDate(desde, hasta);
 				System.out.println(comprasEncontradas.toString());
 				if (comprasEncontradas.size() > 0) {
 					String mensajeResultadoBueno = "Búsqueda Realizada correctamente";
+					int numeroResultados = comprasEncontradas.size();
 					model.addAttribute("mensajeResultado", mensajeResultadoBueno);
-
+					model.addAttribute("numeroResultados", numeroResultados);
 					model.addAttribute("compras", comprasEncontradas);
 
 				} else {
-					String mensajeResultadoMalo = "No se ha encontrado nada";
+					String mensajeResultadoMalo = null;
 					model.addAttribute("mensajeResultado", mensajeResultadoMalo);
 
 				}
@@ -218,8 +193,6 @@ public class ComprasController {
 
 	public void rellenarCombos(Model model) {
 
-		
-
 		List<ProductoEnt> listadoProductos = productoService.findAll();
 
 		model.addAttribute("productos", listadoProductos);
@@ -227,64 +200,83 @@ public class ComprasController {
 		List<Proveedor> listadoProveedores = proveedoresService.findAll();
 		model.addAttribute("proveedores", listadoProveedores);
 	}
-	
+
 	private ArrayList<CarritoCompras> obtenerCarrito(HttpServletRequest request) {
-	    ArrayList<CarritoCompras> carrito = (ArrayList<CarritoCompras>) request.getSession().getAttribute("carrito");
-	    if (carrito == null) {
-	    	
-	        carrito = new ArrayList<>();
-	    }
-	    return carrito;
+
+		ArrayList<CarritoCompras> carrito = (ArrayList<CarritoCompras>) request.getSession().getAttribute("carrito");
+		if (carrito == null) {
+
+			carrito = new ArrayList<>();
+		}
+		return carrito;
 	}
-	
-	
-	
+
 	@PostMapping("/compras/compraRealizada")
-	public String compraRealizada(HttpServletRequest request,HttpSession sesion){
-		
-		System.out.println("Carrito de compra"+ sesion.getAttribute("carrito") );
-		
-		ArrayList<CarritoCompras> carrito = (ArrayList<CarritoCompras>) sesion.getAttribute("carrito");	
-		
-		ArrayList<DetalleCompra> detalle = new ArrayList<DetalleCompra>();
-		
-		//Compra compra = new Compra();
-		
+	public String compraRealizada(HttpServletRequest request, HttpSession sesion, Model model) {
+
+		System.out.println("Carrito de compra" + sesion.getAttribute("carrito"));
+
+		List<CarritoCompras> carrito = (List<CarritoCompras>) sesion.getAttribute("carrito");
+
+		List<DetalleCompra> detalle = new ArrayList<DetalleCompra>();
+
+
+
 		double importeTotalCompra;
 		
-		for (CarritoCompras carritoCompras : carrito) {
-			//Double importeCompra = carritoCompras.getImporte()+ carritoCompras.getImporte();
-			//Compra compra = new Compra();
-			//compra.setImporteCompra(importeCompra);
-			DetalleCompra detalleCompra = new DetalleCompra();
-			//detalleCompra.setCompra(compra);
-			//detalleCompra.setCompra(carritoCompras.)
-			//int detalleID = detalleCompra.getIdDetalleCompra();
-			//detalleCompra.setIdDetalleCompra(detalleID);
-			detalleCompra.setProductos(carritoCompras.getProductoEnt());
-			detalleCompra.setProveedores(carritoCompras.getProveedor());
-			detalleCompra.setFechaCompra(carritoCompras.getFecha());
-			detalleCompra.setCantidad(carritoCompras.getCantidad());
-			detalleCompra.setImporteCompra(carritoCompras.getImporte());
-			System.out.println(detalleCompra.toString());
+		
+		try {
 			
-			
-			//	IMPORTE TOTAL
-			
-			importeTotalCompra= carritoCompras.getImporte()+ carritoCompras.getImporte();
-			
-			detalle.add(detalleCompra);
-			
-			
-			System.out.println(detalle.toString());
+			if (carrito.isEmpty() == true) {
+				
+				
+				return "redirect:/compras/registroCompra";
+				
+			} else {
+
+				for (CarritoCompras carritoCompras : carrito) {
+					// Double importeCompra = carritoCompras.getImporte()+
+					// carritoCompras.getImporte();
+
+					// compra.setImporteCompra(importeCompra);
+				
+					DetalleCompra detalleCompra = new DetalleCompra();
+				
+					detalleCompra.setProductos(carritoCompras.getProductoEnt());
+					detalleCompra.setProveedores(carritoCompras.getProveedor());
+					detalleCompra.setFechaCompra(carritoCompras.getFecha());
+					detalleCompra.setCantidad(carritoCompras.getCantidad());
+					detalleCompra.setImporteCompra(carritoCompras.getImporte());
+					System.out.println(detalleCompra.toString());
+
+					// IMPORTE TOTAL
+
+					importeTotalCompra = carritoCompras.getImporte() + carritoCompras.getImporte();
+
+					detalle.add(detalleCompra);
+					
+					model.addAttribute("detalleCompra",detalleCompra);
+
+					//Compra compra = new Compra(importeTotalCompra, detalleCompra);
+
+					System.out.println(detalle.toString());
+					
+					ProductoEnt producto = carritoCompras.getProductoEnt();
+					
+					producto.setStock(producto.getStock()+ carritoCompras.getCantidad());
+					productoService.actualizarProducto(producto);
+					
+				}
+			}
+		} catch (Exception e) {
 			
 		}
 		
 		detalleService.insertar(detalle);
-		//comprasProductoService.realizarCompra(compra);
+	
+		// comprasProductoService.realizarCompra(compra);
 
-		
-		return "redirect:/compras/registroCompra";
-		
+		return "redirect:/compras";
+
 	}
 }

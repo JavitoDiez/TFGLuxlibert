@@ -1,5 +1,6 @@
 package com.gestorVentas.Servicio;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,18 @@ public class DetalleCompraService implements IDetalleCompraService {
 	public Optional<DetalleCompra> findById(int idDetalleCompra) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<DetalleCompra> findByRangeDate(Date desde, Date hasta) {
+		// TODO Auto-generated method stub
+		return detalleCompraService.findByRangeDate(desde, hasta);
+	}
+
+	@Override
+	public List<DetalleCompra> findAllLimitFive() {
+		// TODO Auto-generated method stub
+		return detalleCompraService.findAllLimitFive();
 	}
 
 }
