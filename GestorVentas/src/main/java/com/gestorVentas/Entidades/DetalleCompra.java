@@ -29,13 +29,13 @@ public class DetalleCompra {
 	@ManyToOne
 	@JoinColumn(name="id_producto_pk",nullable=false)
 	@NotNull(message = "Selecciona la categoria del producto")
-	private ProductoEnt listaProductos;
+	private ProductoEnt productos;
 	
 	
 	@ManyToOne
 	@JoinColumn(name="id_proveedor_pk",nullable=false)
 	@NotNull(message = "Selecciona la categoria del producto")
-	private Proveedor listaProveedores;
+	private Proveedor proveedores;
 	
 	@Column(name="fecha_compra")
 	@NotNull(message="Debes seleccionar la fecha de compra")
@@ -63,20 +63,20 @@ public class DetalleCompra {
 		this.idDetalleCompra = idDetalleCompra;
 	}
 
-	public ProductoEnt getListaProductos() {
-		return listaProductos;
+	public ProductoEnt getProductos() {
+		return productos;
 	}
 
-	public void setListaProductos(ProductoEnt listaProductos) {
-		this.listaProductos = listaProductos;
+	public void setProductos(ProductoEnt listaProductos) {
+		this.productos = listaProductos;
 	}
 
-	public Proveedor getListaProveedores() {
-		return listaProveedores;
+	public Proveedor getProveedores() {
+		return proveedores;
 	}
 
-	public void setListaProveedores(Proveedor listaProveedores) {
-		this.listaProveedores = listaProveedores;
+	public void setProveedores(Proveedor listaProveedores) {
+		this.proveedores = listaProveedores;
 	}
 
 	
@@ -114,8 +114,8 @@ public class DetalleCompra {
 
 	@Override
 	public String toString() {
-		return "DetalleCompra [idDetalleCompra=" + idDetalleCompra + ", listaProductos=" + listaProductos
-				+ ", listaProveedores=" + listaProveedores+"]";
+		return "DetalleCompra [idDetalleCompra=" + idDetalleCompra + ", listaProductos=" + productos
+				+ ", listaProveedores=" + proveedores+"]";
 	}
 	
 	

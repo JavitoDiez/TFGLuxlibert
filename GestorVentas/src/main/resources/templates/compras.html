@@ -129,7 +129,6 @@
 					<table class="table table-stripped width-100">
 						<thead>
 							<tr>
-								<th scope="col">ID COMPRA</th>
 								<th scope="col">FECHA COMPRA</th>
 								<th scope="col">PRODUCTO</th>
 								<th scope="col">PROVEEDOR</th>
@@ -140,12 +139,12 @@
 						<tbody>
 							<tr th:each="compra : ${compras}">
 
-								<td th:text="${compra.idCompra}"></td>
+							
 								<td th:text="${compra.fechaCompra}"></td>
-								<td th:text="${compra.materiaPrima.nombre}"></td>
-								<td th:text="${compra.proveedor.nombreProveedor}"></td>
-								<td th:text="${compra.cantidad}">/uds</td>
-								<td th:text="${compra.importeCompra}">$</td>
+								<td th:text="${compra.productos.nombreProducto}"></td>
+								<td th:text="${compra.proveedores.nombreProveedor}"></td>
+								<td th:text="${compra.cantidad}"></td>
+								<td th:text="${compra.importeCompra} "></td>
 							</tr>
 						</tbody>
 					</table>

@@ -44,11 +44,17 @@ public class ComprasController {
 
 	@Autowired
 	private ProductoService productoService;
+	
+	@Autowired
+	private DetalleCompraService detalleService;
 
 	@GetMapping("/compras")
 	public String listadoComprasPrincipal(Model model) {
 
-	
+		
+		
+		model.addAttribute("compras", detalleService.findAll());
+		
 		this.rellenarCombos(model);
 
 		return "compras";
@@ -240,22 +246,43 @@ public class ComprasController {
 		
 		ArrayList<CarritoCompras> carrito = (ArrayList<CarritoCompras>) sesion.getAttribute("carrito");	
 		
+		ArrayList<DetalleCompra> detalle = new ArrayList<DetalleCompra>();
 		
+		//Compra compra = new Compra();
+		
+		double importeTotalCompra;
 		
 		for (CarritoCompras carritoCompras : carrito) {
-			Double importeCompra = carritoCompras.getImporte()+ carritoCompras.getImporte();
+			//Double importeCompra = carritoCompras.getImporte()+ carritoCompras.getImporte();
 			//Compra compra = new Compra();
 			//compra.setImporteCompra(importeCompra);
 			DetalleCompra detalleCompra = new DetalleCompra();
 			//detalleCompra.setCompra(compra);
 			//detalleCompra.setCompra(carritoCompras.)
-			detalleCompra.setListaProductos(carritoCompras.getProductoEnt());
-			detalleCompra.setListaProveedores(carritoCompras.getProveedor());
+			//int detalleID = detalleCompra.getIdDetalleCompra();
+			//detalleCompra.setIdDetalleCompra(detalleID);
+			detalleCompra.setProductos(carritoCompras.getProductoEnt());
+			detalleCompra.setProveedores(carritoCompras.getProveedor());
 			detalleCompra.setFechaCompra(carritoCompras.getFecha());
+			detalleCompra.setCantidad(carritoCompras.getCantidad());
 			detalleCompra.setImporteCompra(carritoCompras.getImporte());
 			System.out.println(detalleCompra.toString());
+			
+			
+			//	IMPORTE TOTAL
+			
+			importeTotalCompra= carritoCompras.getImporte()+ carritoCompras.getImporte();
+			
+			detalle.add(detalleCompra);
+			
+			
+			System.out.println(detalle.toString());
+			
 		}
 		
+		detalleService.insertar(detalle);
+		//comprasProductoService.realizarCompra(compra);
+
 		
 		return "redirect:/compras/registroCompra";
 		

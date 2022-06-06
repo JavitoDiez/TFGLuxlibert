@@ -90,6 +90,7 @@
 		<div class="header_img">
 			<img th:src="@{img/logoLuxlibert.jpeg}" alt="">
 		</div>
+		<a href="/compras" class="text-white"> Volver</a>
 	</header>
 
 	<div class="container pt-5">
@@ -183,16 +184,17 @@
 							<table class="table table-bordered pt-4">
 								<thead>
 									<tr>
+										<th>Item</th>
 										<th>Producto</th>
 										<th>Proveedor</th>
 										<th>Cantidad</th>
 										<th>Importe</th>
+										<th>Fecha</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr th:each="carrito, iterador : ${carrito}">
 										<td th:text="${iterador.index}"></td>
-										
 										<td th:text="${carrito.productoEnt.nombreProducto}"></td>
 										<td th:text="${carrito.proveedor.nombreProveedor}"></td>
 										<td th:text="${carrito.cantidad}"></td>
@@ -205,10 +207,13 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
-	
-		<form class="form" th:action="@{/compras/compraRealizada}" th:object="${CarritoCompras}" method="post">
-			<button type="submit" class="btn" id="boton" >REGISTRAR COMPRA</button>
+		<form class="form" th:action="@{/compras/compraRealizada}"
+			th:object="${CarritoCompras}" method="post">
+			<button type="submit" class="btn text-center" id="boton">REGISTRAR
+				COMPRA</button>
 		</form>
+	</div>
+
+
 </body>
 </html>

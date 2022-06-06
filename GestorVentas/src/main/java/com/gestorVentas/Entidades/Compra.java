@@ -43,7 +43,6 @@ public class Compra {
 	private DetalleCompra detalleCompra;
 
 	
-	
 
 
 	public int getIdCompra() {
