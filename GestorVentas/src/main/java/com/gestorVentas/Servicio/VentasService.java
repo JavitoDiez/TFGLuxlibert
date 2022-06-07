@@ -36,7 +36,7 @@ public class VentasService implements IVentasService {
 	}
 
 	@Override
-	public Venta realizarCompra(Venta venta) {
+	public Venta realizarVenta(Venta venta) {
 		// TODO Auto-generated method stub
 		return ventasRepository.save(venta);
 	}

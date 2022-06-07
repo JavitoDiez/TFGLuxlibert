@@ -17,7 +17,7 @@ public interface IVentasService {
 	
 	public Page<Venta>findAll (Pageable pageable);
 	
-	public Venta realizarCompra(Venta venta);
+	public Venta realizarVenta(Venta venta);
 	
 	public List<Venta> findByRangeDate(Date desde, Date hasta);
 	

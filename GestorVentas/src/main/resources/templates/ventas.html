@@ -74,8 +74,8 @@
 						</a> <a href="/proveedores" class="nav_link"> <i
 							class="fa fa-handshake-o" aria-hidden="true"></i> <span
 							class="nav_name">Proveedores</span>
-						</a> <a href="/ventas" class="nav_link active"> <i class='bx bx-dollar'></i>
-							<span class="nav_name">Ventas</span>
+						</a> <a href="/ventas" class="nav_link active"> <i
+							class='bx bx-dollar'></i> <span class="nav_name">Ventas</span>
 						</a> <a href="/compras" class="nav_link "> <i
 							class="fa fa-shopping-basket" aria-hidden="true"></i> <span
 							class="nav_name">Compras</span>
@@ -101,28 +101,47 @@
 			<div class="container pt-4 ">
 				<div class="row">
 					<div class="text-center">
-						<form th:action="@{/compras}" method="post">
+						<form th:action="@{/ventas}" method="post">
 							<div>
 								<label>Desde</label> <input type="date" th:name="desde" required />
 								<label>Hasta</label> <input type="date" th:name="hasta" required />
 								<button type="submit" id="boton" class="btn">Buscar</button>
-								<a href="/compras" id="boton" class="btn" style="float: right;">Limpiar
+								<a href="/ventas" id="boton" class="btn" style="float: right;">Limpiar
 									Filtro</a>
 							</div>
 						</form>
-						<a href="/compras/registroCompra" class="btn" id="boton"
+						<!-- <a href="/venta/registrarVenta" class="btn" id="boton"
 							style="text-align: center; float: left; padding-left: 25px">REGISTRAR
-							COMPRA </a>
+							COMPRA </a>-->
+
+						<button id="boton" type="button" class="btn"
+							data-bs-toggle="modal" data-bs-target="#exampleModal"
+							style="float: left; padding-left: 25px">REGISTRAR VENTA</button>
+
 					</div>
 				</div>
 			</div>
+
+			<div
+				class="text-center alert alert-success alert-dismissible fade show"
+				th:if="${venta != null}" style="width: 70%">
+				!Venta registrada con éxito!
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+
+
+
+
 
 			<div class="container pt-3">
 
 				<div
 					class="text-center alert alert-success alert-dismissible fade show"
-					role="alert" th:if="${mensajeResultadoVentas != null}" style="width: 70%">
-					!Se han encontrado : <label th:text="${numeroResultadosVentas}"></label>  resultados
+					role="alert" th:if="${mensajeResultadoVentas != null}"
+					style="width: 70%">
+					!Se han encontrado : <label th:text="${numeroResultadosVentas}"></label>
+					resultados
 					<button type="button" class="btn-close" data-bs-dismiss="alert"
 						aria-label="Close"></button>
 				</div>
@@ -133,22 +152,20 @@
 					<table class="table table-stripped width-100">
 						<thead>
 							<tr>
-								<th scope="col">FECHA COMPRA</th>
+								<th scope="col">FECHA VENTA</th>
 								<th scope="col">PRODUCTO</th>
-								<th scope="col">PROVEEDOR</th>
+								<th scope="col">CATEGORIA PRODUCTO</th>
 								<th scope="col">CANTIDAD</th>
-								<th scope="col">IMPORTE</th>
+								<th scope="col">IMPORTE VENTA</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="compra : ${compras}">
-
-
-								<td th:text="${compra.fechaCompra}"></td>
-								<td th:text="${compra.productos.nombreProducto}"></td>
-								<td th:text="${compra.proveedores.nombreProveedor}"></td>
-								<td th:text="${compra.cantidad}"></td>
-								<td th:text="${compra.importeCompra} "></td>
+							<tr th:each="venta : ${listadoVentas}">
+								<td th:text="${venta.fechaVenta}"></td>
+								<td th:text="${venta.producto.nombreProducto}"></td>
+								<td th:text="${venta.producto.categoriaProducto.categoria}"></td>
+								<td th:text="${venta.cantidadProductoVendido}"></td>
+								<td th:text="${venta.importeVenta} "></td>
 							</tr>
 						</tbody>
 					</table>
@@ -170,14 +187,59 @@
 					<div class="col-md-2"></div>
 				</div>
 			</div>
-		</div>
-		<!--  <button id="boton" type="button" class="btn" data-bs-toggle="modal"
-				data-bs-target="#exampleModal" style="float: right; padding-left: 25px">REGISTRAR
-				COMPRA</button>-->
-
-		</div>
-
 	</section>
+
+
+
+	<div class="modal fade" id="exampleModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Agregar
+						Producto</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form class="form" th:object="${Venta}"
+						th:action="@{/registrarVenta}" method="post">
+						<div class="form-group mt-4">
+							<label for="exampleInputNombreProducto1">Fecha de la
+								Venta </label> <input type="date" class="form-control" id="fechaVenta"
+								aria-describedby="emailHelp" name="fechaVenta" required>
+						</div>
+
+						<div class="form-group mt-4">
+							<label for="labelCategoria">Selecciona el producto que
+								deseas :</label> <select name="producto" required>
+								<option th:each="producto : ${productos}"
+									th:value="${producto.nombreProducto}"
+									th:text="${producto.nombreProducto}" th:selected="true" />
+							</select>
+						</div>
+
+						<div class="form-group mt-4">
+							<label for="labelPVP">Selecciona la cantidad que deseas
+								comprar: </label> <input type="number" name="cantidad"
+								class="form-control" id="cantidad" required>
+						</div>
+
+						<div class="form-group mt-4">
+							<button class="btn btn-success" type="submit">Agregar</button>
+						</div>
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 </body>
 

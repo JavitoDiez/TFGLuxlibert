@@ -25,6 +25,8 @@ public interface IProductoService {
 	
 	public ProductoEnt findByName(String nombre);
 	
+	List<ProductoEnt> findListByName(String nombre);
+	
 	
 	
 	

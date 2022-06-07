@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Venta {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_venta")
 	private int idVenta;
 	
@@ -24,8 +24,8 @@ public class Venta {
 	private int cantidadProductoVendido;
 	
 	
-	@OneToMany
-	@JoinColumn(name="id_producto" ,table = "productos_acabados")
+	@ManyToOne
+	@JoinColumn(name="id_producto")
 	private ProductoEnt producto;
 
 
@@ -81,6 +81,22 @@ public class Venta {
 
 	public Venta(double importeVenta, Date fechaVenta, int cantidadProductoVendido, ProductoEnt producto) {
 		super();
+		this.importeVenta = importeVenta;
+		this.fechaVenta = fechaVenta;
+		this.cantidadProductoVendido = cantidadProductoVendido;
+		this.producto = producto;
+	}
+	
+	
+
+	public Venta() {
+		super();
+	}
+
+
+	public Venta(int idVenta, double importeVenta, Date fechaVenta, int cantidadProductoVendido, ProductoEnt producto) {
+		super();
+		this.idVenta = idVenta;
 		this.importeVenta = importeVenta;
 		this.fechaVenta = fechaVenta;
 		this.cantidadProductoVendido = cantidadProductoVendido;

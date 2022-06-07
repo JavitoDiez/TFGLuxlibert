@@ -53,6 +53,12 @@ public class ProductoService implements IProductoService{
 		// TODO Auto-generated method stub
 		return productosRepository.findByName(nombre);
 	}
+	
+	@Override
+	public List<ProductoEnt> findListByName(String nombre) {
+		// TODO Auto-generated method stub
+		return (List<ProductoEnt>) productosRepository.findListByName(nombre);
+	}
 
 	@Override
 	public List<ProductoEnt> findAll() {
