@@ -40,6 +40,7 @@ public class VentasController {
 			@RequestParam("producto") String nombreProducto, @RequestParam("cantidad") int cantidad) {
 
 		List<ProductoEnt> producto = productoService.findListByName(nombreProducto);
+		
 		for (ProductoEnt productoEnt : producto) {
 
 			Double importeVenta = productoEnt.getPrecioVenta() * cantidad;
