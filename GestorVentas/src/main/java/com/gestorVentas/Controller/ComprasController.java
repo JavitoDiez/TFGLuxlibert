@@ -124,8 +124,6 @@ public class ComprasController {
 			@RequestParam("cantidad") int cantidad, Model model,
 			HttpServletRequest request, HttpSession session) {
 
-		
-
 		List<CarritoCompras> carrito = (List<CarritoCompras>) session.getAttribute("carrito");
 
 		Proveedor proveedor = proveedoresService.findByName(nombreProveedor);
@@ -208,6 +206,7 @@ public class ComprasController {
 	private ArrayList<CarritoCompras> obtenerCarrito(HttpServletRequest request) {
 
 		ArrayList<CarritoCompras> carrito = (ArrayList<CarritoCompras>) request.getSession().getAttribute("carrito");
+		
 		if (carrito == null) {
 
 			carrito = new ArrayList<>();
@@ -262,7 +261,6 @@ public class ComprasController {
 					// Compra compra = new Compra(importeTotalCompra, detalleCompra);
 
 					System.out.println(detalle.toString());
-
 					producto.setStock(producto.getStock() + carritoCompras.getCantidad());
 					productoService.actualizarProducto(producto);
 
