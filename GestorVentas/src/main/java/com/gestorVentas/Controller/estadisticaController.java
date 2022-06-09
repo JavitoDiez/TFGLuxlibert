@@ -21,13 +21,13 @@ public class estadisticaController {
 	 @GetMapping("/estadisticas")
 	    public String getPieChart(Model model) {
 		 
-		List<Venta> listadoVentas =  ventasService.findAll();
+		/*List<Venta> listadoVentas =  ventasService.findAll();
 		
 		for (Venta venta : listadoVentas) {
 			
 			Double ingresosTrimestral1 = venta.getImporteVenta()+venta.getImporteVenta();
 			
-		}
+		}*/
 		 
 		 
 	        Map<String, Double> graphData = new TreeMap<>();
