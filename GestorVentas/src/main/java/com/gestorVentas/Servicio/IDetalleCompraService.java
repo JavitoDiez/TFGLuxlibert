@@ -19,5 +19,7 @@ public interface IDetalleCompraService {
 	public List<DetalleCompra> findByRangeDate(Date desde, Date hasta);
 	
 	public List<DetalleCompra> findAllLimitFive();
+	
+	Double totalGastosCompras();
 
 }

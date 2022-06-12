@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.gestorVentas.DAO.IComprasProductos;
 import com.gestorVentas.Entidades.Compra;
+import com.gestorVentas.Entidades.DetalleCompra;
 
 @Service
 public class ComprasProductoService implements ICompraProductoService {
@@ -41,6 +42,8 @@ public class ComprasProductoService implements ICompraProductoService {
 		return compraRepository.findAll(pageable);
 	}
 
+
+	
 
 
 }

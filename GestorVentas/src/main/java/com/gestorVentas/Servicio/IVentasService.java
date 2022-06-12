@@ -1,7 +1,8 @@
 package com.gestorVentas.Servicio;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,5 +21,11 @@ public interface IVentasService {
 	public Venta realizarVenta(Venta venta);
 	
 	public List<Venta> findByRangeDate(Date desde, Date hasta);
+	
+	public List<Venta> ventasPorProductos();
+	
+	public Map<String, Double> ingresosProductoMesActual();
+	
+	Double totalIngresosVentas();
 	
 }

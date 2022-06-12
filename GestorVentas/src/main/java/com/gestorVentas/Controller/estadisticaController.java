@@ -47,51 +47,48 @@ public class estadisticaController {
 		 * (double) 1256); graphData.put("3º Trimestre", (double) 3856);
 		 * graphData.put("4º Trimestre", (double) 19807);
 		 */
+		
 
-		model.addAttribute("ingresosVentas", this.totalIngresosVentas());
+		
+		
+		String simboloEuro = " €";
+		
+		String simboloPorcentaje = " %";
+
+		model.addAttribute("ingresosVentas", ventasService.totalIngresosVentas());
 		model.addAttribute("beneficios", this.beneficios());
-		model.addAttribute("chartData", this.ingresosProductoMesActual());
-		model.addAttribute("datosGraficos", this.ingresoGastoTrimestre());
+		model.addAttribute("ventasRealizadas", ventasService.ventasRealizadasMesActual());
+		model.addAttribute("ventasRealizadasMesAnterior", this.porcentajeVentasActualAnterior());
+		model.addAttribute("simboloPorcentaje", simboloPorcentaje);
+		model.addAttribute("simboloEuro", simboloEuro);
+		
+		//model.addAttribute("chartData", ventasService.ingresosProductoMesActual());
+		model.addAttribute("chartDataProductos",this.ingresosProductoMesActual());
+		//model.addAttribute("datosGraficos", this.ingresoGastoTrimestre());
 		
 		return "estadisticas";
 	}
-
-	public Map<String, Double> ingresosProductoMesActual() {
-
-		List<Venta> listadoVentas = ventasService.findAll();
-
-		List<DetalleCompra> listadoCompras = compraService.findAll();
-
-		List<ProductoEnt> listadoProductos = productoService.findAll();
-
-		Date ahora = new Date();
-		SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
-		formateador.format(ahora);
-		Calendar fechaActual = Calendar.getInstance();
-
-		fechaActual.setTime(ahora);
-
-		int mesActual = fechaActual.get(Calendar.MONTH);
+	
+	
+	public Map<String, Double> ingresosProductoMesActual(){
+		
+		List<Venta> listadoVentas = ventasService.ventasPorProductos();
+		
 		Map<String, Double> datosGrafica = new TreeMap<>();
-
+		
 		for (Venta venta : listadoVentas) {
-			double importeTotalProducto = 0.0;
-			if (venta.getFechaVenta().getMonth() == mesActual) {
-				
-				
-				 importeTotalProducto = venta.getImporteVenta();
-				
-
-			}
-			datosGrafica.put(venta.getProducto().getNombreProducto(), importeTotalProducto);
-
+			
+			datosGrafica.put(venta.getProducto().getNombreProducto(), venta.getImporteVenta());
 		}
-
+	
 		return datosGrafica;
-
 	}
 	
-	public Map<String, TreeMap<Double, Double>> ingresoGastoTrimestre() {
+	
+	
+	
+	
+	/*public Map<String, TreeMap<Double, Double>> ingresoGastoTrimestre() {
 		
 		List<Venta> listadoVentas = ventasService.findAll();
 		
@@ -156,39 +153,25 @@ public class estadisticaController {
 
 		
 		return datosGrafico;
+	}*/
+	
+	public int porcentajeVentasActualAnterior() {
+		
+		int ventasActuales  = ventasService.ventasRealizadasMesActual();
+		int ventasMesAnterior = ventasService.ventasRealizadasMesAnterior();
+		
+		
+		return ((ventasActuales/ventasMesAnterior)*100)-100;
+		
 	}
 	
 
-	public Double totalIngresosVentas() {
-		List<Venta> listadoVentas = ventasService.findAll();
-
-		double totalIngresosVenta = 0;
-
-		for (Venta venta : listadoVentas) {
-
-			totalIngresosVenta = venta.getImporteVenta() + venta.getImporteVenta();
-		}
-
-		return totalIngresosVenta;
-	}
-
-	public Double totalGastosCompras() {
-
-		List<DetalleCompra> listadoCompras = compraService.findAll();
-
-		double totalGastosCompras = 0;
-		for (DetalleCompra compra : listadoCompras) {
-
-			totalGastosCompras = compra.getImporteCompra() + compra.getImporteCompra();
-
-		}
-
-		return totalGastosCompras;
-	}
 
 	public Double beneficios() {
-
-		return totalIngresosVentas() - totalGastosCompras();
+		
+		double importe = ventasService.totalIngresosVentas() - compraService.totalGastosCompras();
+		
+		return Math.round(importe*100.0)/100.0;
 
 	}
 

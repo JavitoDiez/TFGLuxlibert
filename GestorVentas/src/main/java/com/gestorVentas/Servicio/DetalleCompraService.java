@@ -51,5 +51,19 @@ public class DetalleCompraService implements IDetalleCompraService {
 		// TODO Auto-generated method stub
 		return detalleCompraService.findAllLimitFive();
 	}
+	
+	public Double totalGastosCompras() {
+
+		List<DetalleCompra> listadoCompras = detalleCompraService.findAll();
+
+		double totalGastosCompras = 0;
+		for (DetalleCompra compra : listadoCompras) {
+
+			totalGastosCompras += compra.getImporteCompra();
+
+		}
+
+		return totalGastosCompras;
+	}
 
 }
