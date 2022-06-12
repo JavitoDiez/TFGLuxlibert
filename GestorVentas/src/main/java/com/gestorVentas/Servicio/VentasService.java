@@ -88,7 +88,6 @@ public class VentasService implements IVentasService {
 		 * 
 		 * }
 		 */
-
 		for (Venta venta : listadoVentas) {
 			int id = venta.getProducto().getIdProducto();
 			if (mesActual == venta.getFechaVenta().getMonth()) {
@@ -121,7 +120,101 @@ public class VentasService implements IVentasService {
 		return datosGrafica;
 
 	}
+	
+	public Map<String, Integer> productosMasVendidos() {
+		
+		
+		List<Venta> listadoVentas = ventasRepository.findAll();
+		List<Integer> listadoVentasTotales = new ArrayList<Integer>();
 
+		//Date ahora = new Date();
+		Map<String, Integer> datosGrafica = new TreeMap<>();
+	
+		int cantidad = 0;
+		
+		for (Venta venta : listadoVentas) {
+			int id = venta.getProducto().getIdProducto();
+				if (listadoVentasTotales.contains(id) == false) {
+					listadoVentasTotales.add(id);
+				}
+			
+		}
+		System.out.println("LISTADO ID; " + listadoVentasTotales.toString());
+		List<Integer> listadoTotales = new ArrayList<Integer>();
+		for (int i = 0; i < listadoVentasTotales.size(); i++) {
+			cantidad = 0;
+			String nombreProducto = "";
+			for (Venta venta2 : listadoVentas) {
+				if (listadoVentasTotales.get(i) == venta2.getProducto().getIdProducto()) {
+					cantidad += venta2.getCantidadProductoVendido();
+					nombreProducto = venta2.getProducto().getNombreProducto();
+				}
+
+			}
+			datosGrafica.put(nombreProducto, cantidad);
+			System.out.println(datosGrafica.toString());
+			listadoTotales.add(cantidad);
+		}
+
+		System.out.println(listadoTotales.toString());
+
+		return datosGrafica;
+
+		
+	}
+	
+	public Map<String, Double> ingresosProductoByMes(Date date) {
+
+		List<Venta> listadoVentas = ventasRepository.findAll();
+		List<Integer> listadoVentasTotales = new ArrayList<Integer>();
+
+		//Date ahora = new Date();
+		SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
+		formateador.format(date);
+		Calendar fechaSeleccionadaUsuario = Calendar.getInstance();
+
+		fechaSeleccionadaUsuario.setTime(date);
+
+		int mesElegido = fechaSeleccionadaUsuario.get(Calendar.MONTH);
+		
+		
+		Map<String, Double> datosGrafica = new TreeMap<>();
+		double cantidadTotal = 0.0;
+		double importe = 0.0;
+		
+		for (Venta venta : listadoVentas) {
+			int id = venta.getProducto().getIdProducto();
+			if (mesElegido == venta.getFechaVenta().getMonth()) {
+				if (listadoVentasTotales.contains(id) == false) {
+					listadoVentasTotales.add(id);
+
+				}
+			}
+		}
+		System.out.println("LISTADO ID; " + listadoVentasTotales.toString());
+		List<Double> listadoTotales = new ArrayList<Double>();
+		for (int i = 0; i < listadoVentasTotales.size(); i++) {
+			importe = 0;
+			String nombreProducto = "";
+			for (Venta venta2 : listadoVentas) {
+				if (listadoVentasTotales.get(i) == venta2.getProducto().getIdProducto()) {
+					importe += venta2.getImporteVenta();
+					nombreProducto = venta2.getProducto().getNombreProducto();
+				}
+
+			}
+			datosGrafica.put(nombreProducto, importe);
+			System.out.println(datosGrafica.toString());
+			listadoTotales.add(importe);
+		}
+
+		System.out.println(listadoTotales.toString());
+
+		return datosGrafica;
+
+	}
+
+	
 	public Double totalIngresosVentas() {
 		List<Venta> listadoVentas = ventasRepository.findAll();
 
@@ -186,7 +279,7 @@ public class VentasService implements IVentasService {
 			}
 
 		}
-
+System.out.println("Ventas Mes anterior"+ventasRealizadas);
 		return ventasRealizadas;
 
 	}

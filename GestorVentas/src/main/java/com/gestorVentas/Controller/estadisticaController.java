@@ -36,8 +36,10 @@ public class estadisticaController {
 
 	// DECLARO GLOBALES LAS LISTAS PARA HACER CALCULOS CON ELLAS
 
+	
+	
 	@GetMapping("/estadisticas")
-	public String getPieChart(Model model) {
+	public String dashboardPrincipal(Model model) {
 
 		// model.addAttribute(null, listadoVentas);
 
@@ -64,9 +66,20 @@ public class estadisticaController {
 		
 		model.addAttribute("chartData", ventasService.ingresosProductoMesActual());
 		model.addAttribute("chartDataProductos",this.ingresosProductoMesActual());
-		//model.addAttribute("datosGraficos", this.ingresoGastoTrimestre());
+		model.addAttribute("cantidadVendida", ventasService.productosMasVendidos());
 		
 		return "estadisticas";
+	}
+	
+	@GetMapping("/estadisticas/productosMasVendidos")
+	public String graficoProductosVendidos(Model model) {
+
+	
+
+		
+		model.addAttribute("cantidadVendida", ventasService.productosMasVendidos());
+		
+		return "iframeProductosMasVendidos";
 	}
 	
 	
@@ -161,7 +174,7 @@ public class estadisticaController {
 		int ventasMesAnterior = ventasService.ventasRealizadasMesAnterior();
 		
 		
-		return ((ventasActuales/ventasMesAnterior)*100)-100;
+		return ventasActuales- ventasMesAnterior;
 		
 	}
 	
