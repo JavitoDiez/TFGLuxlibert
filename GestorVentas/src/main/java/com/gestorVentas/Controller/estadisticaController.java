@@ -62,7 +62,7 @@ public class estadisticaController {
 		model.addAttribute("simboloPorcentaje", simboloPorcentaje);
 		model.addAttribute("simboloEuro", simboloEuro);
 		
-		//model.addAttribute("chartData", ventasService.ingresosProductoMesActual());
+		model.addAttribute("chartData", ventasService.ingresosProductoMesActual());
 		model.addAttribute("chartDataProductos",this.ingresosProductoMesActual());
 		//model.addAttribute("datosGraficos", this.ingresoGastoTrimestre());
 		

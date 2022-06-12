@@ -1,7 +1,7 @@
 package com.gestorVentas.Servicio;
 
-
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Date;
@@ -21,7 +21,7 @@ public class VentasService implements IVentasService {
 
 	@Autowired
 	IVentasRepository ventasRepository;
-	
+
 	@Override
 	public List<Venta> findAll() {
 		// TODO Auto-generated method stub
@@ -54,16 +54,14 @@ public class VentasService implements IVentasService {
 
 	@Override
 	public List<Venta> ventasPorProductos() {
-		
-		
-		
-		
-		return  ventasRepository.ventasPorProductos(); 
+
+		return ventasRepository.ventasPorProductos();
 	}
-	
+
 	public Map<String, Double> ingresosProductoMesActual() {
 
 		List<Venta> listadoVentas = ventasRepository.findAll();
+		List<Integer> listadoVentasTotales = new ArrayList<Integer>();
 
 		Date ahora = new Date();
 		SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
@@ -74,19 +72,51 @@ public class VentasService implements IVentasService {
 
 		int mesActual = fechaActual.get(Calendar.MONTH);
 		Map<String, Double> datosGrafica = new TreeMap<>();
+		double cantidadTotal = 0.0;
+		double importe = 0.0;
+
+		/*
+		 * for (Venta venta : listadoVentas) { int id =
+		 * venta.getProducto().getIdProducto() ;
+		 * 
+		 * if(venta.getProducto().getIdProducto() ==
+		 * venta.getProducto().getIdProducto()|| venta.getFechaVenta().getMonth() ==
+		 * mesActual) { cantidadTotal += venta.getCantidadProductoVendido();
+		 * datosGrafica.put(venta.getProducto().getNombreProducto(), cantidadTotal);
+		 * 
+		 * }
+		 * 
+		 * }
+		 */
 
 		for (Venta venta : listadoVentas) {
-			double importeTotalProducto = 0.0;
-			if (venta.getFechaVenta().getMonth() == mesActual) {
-				
-				
-				 importeTotalProducto = venta.getImporteVenta();
-				
+			int id = venta.getProducto().getIdProducto();
+			if (mesActual == venta.getFechaVenta().getMonth()) {
+				if (listadoVentasTotales.contains(id) == false) {
+
+					listadoVentasTotales.add(id);
+
+				}
+			}
+		}
+		System.out.println("LISTADO ID; " + listadoVentasTotales.toString());
+		List<Double> listadoTotales = new ArrayList<Double>();
+		for (int i = 0; i < listadoVentasTotales.size(); i++) {
+			importe = 0;
+			String nombreProducto = "";
+			for (Venta venta2 : listadoVentas) {
+				if (listadoVentasTotales.get(i) == venta2.getProducto().getIdProducto()) {
+					importe += venta2.getImporteVenta();
+					nombreProducto = venta2.getProducto().getNombreProducto();
+				}
 
 			}
-			datosGrafica.put(venta.getProducto().getNombreProducto(), importeTotalProducto);
-
+			datosGrafica.put(nombreProducto, importe);
+			System.out.println(datosGrafica.toString());
+			listadoTotales.add(importe);
 		}
+
+		System.out.println(listadoTotales.toString());
 
 		return datosGrafica;
 
@@ -99,12 +129,12 @@ public class VentasService implements IVentasService {
 
 		for (Venta venta : listadoVentas) {
 
-			totalIngresosVenta += venta.getImporteVenta() ;
+			totalIngresosVenta += venta.getImporteVenta();
 		}
 
 		return totalIngresosVenta;
 	}
-	
+
 	public int ventasRealizadasMesActual() {
 
 		List<Venta> listadoVentas = ventasRepository.findAll();
@@ -117,22 +147,22 @@ public class VentasService implements IVentasService {
 		fechaActual.setTime(ahora);
 
 		int mesActual = fechaActual.get(Calendar.MONTH);
-		//int mesAnterior = fechaActual.get(Calendar.MONTH - 1);
-		//Map<String, Double> datosGrafica = new TreeMap<>();
+		// int mesAnterior = fechaActual.get(Calendar.MONTH - 1);
+		// Map<String, Double> datosGrafica = new TreeMap<>();
 		int ventasRealizadas = 0;
 		for (Venta venta : listadoVentas) {
-			
+
 			if (venta.getFechaVenta().getMonth() == mesActual) {
-					
+
 				ventasRealizadas += 1;
 			}
-			
+
 		}
 
 		return ventasRealizadas;
 
 	}
-	
+
 	public int ventasRealizadasMesAnterior() {
 
 		List<Venta> listadoVentas = ventasRepository.findAll();
@@ -145,23 +175,20 @@ public class VentasService implements IVentasService {
 		fechaActual.setTime(ahora);
 
 		int mesActual = fechaActual.get(Calendar.MONTH);
-		int mesAnterior = mesActual-1;
-		//Map<String, Double> datosGrafica = new TreeMap<>();
+		int mesAnterior = mesActual - 1;
+		// Map<String, Double> datosGrafica = new TreeMap<>();
 		int ventasRealizadas = 0;
 		for (Venta venta : listadoVentas) {
-			
+
 			if (venta.getFechaVenta().getMonth() == mesAnterior) {
-					
+
 				ventasRealizadas += 1;
 			}
-			
+
 		}
 
 		return ventasRealizadas;
 
 	}
-
-	
-
 
 }
