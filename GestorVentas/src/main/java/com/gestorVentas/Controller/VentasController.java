@@ -41,11 +41,15 @@ public class VentasController {
 
 		List<ProductoEnt> producto = productoService.findListByName(nombreProducto);
 		
+		int stockProducto = 0;
 		for (ProductoEnt productoEnt : producto) {
 
 			Double importeVenta = productoEnt.getPrecioVenta() * cantidad;
-
-			if (productoEnt.getStock() >= cantidad) {
+			stockProducto = productoEnt.getStock();
+			model.addAttribute("stockProducto", stockProducto);
+			model.addAttribute("cantidad", cantidad);
+			
+			if (cantidad <= stockProducto) {
 				Venta venta = new Venta(importeVenta, fechaVenta, cantidad, productoEnt);
 
 				productoEnt.setStock(productoEnt.getStock() - cantidad);
