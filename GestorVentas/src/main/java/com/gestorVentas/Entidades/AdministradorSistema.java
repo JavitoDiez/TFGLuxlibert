@@ -34,6 +34,23 @@ public class AdministradorSistema {
 		this.usuario = usuario;
 		this.claveAdministrador = claveAdministrador;
 	}
+	
+	
+
+	public AdministradorSistema(String usuario) {
+		super();
+		this.usuario = usuario;
+	}
+	
+	public AdministradorSistema() {
+		super();
+		
+	}
+	
+	
+	
+
+
 
 	public AdministradorSistema(String usuario, String claveAdministrador) {
 		super();
