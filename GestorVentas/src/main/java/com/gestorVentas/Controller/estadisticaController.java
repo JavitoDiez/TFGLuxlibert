@@ -3,10 +3,12 @@ package com.gestorVentas.Controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +63,7 @@ public class estadisticaController {
 		model.addAttribute("beneficios", this.beneficios());
 		model.addAttribute("ventasRealizadas", ventasService.ventasRealizadasMesActual());
 		model.addAttribute("ventasRealizadasMesAnterior", this.porcentajeVentasActualAnterior());
+		model.addAttribute("ProductoMasVendido", this.productoMasVendido());
 		model.addAttribute("simboloPorcentaje", simboloPorcentaje);
 		model.addAttribute("simboloEuro", simboloEuro);
 		
@@ -68,13 +71,13 @@ public class estadisticaController {
 		model.addAttribute("chartDataProductos",this.ingresosProductoMesActual());
 		model.addAttribute("cantidadVendida", ventasService.productosMasVendidos());
 		
+		
 		return "estadisticas";
 	}
 	
 	@GetMapping("/estadisticas/productosMasVendidos")
 	public String graficoProductosVendidos(Model model) {
 
-	
 
 		
 		model.addAttribute("cantidadVendida", ventasService.productosMasVendidos());
@@ -167,6 +170,31 @@ public class estadisticaController {
 		
 		return datosGrafico;
 	}*/
+	//@GetMapping("/estadisticas")
+	public String productoMasVendido() {
+		
+		Map<String,Integer> mapaProductosVendidos= ventasService.productosMasVendidos();
+		 int maxValueInMap=(Collections.max(mapaProductosVendidos.values()));
+		// String nombreProdVend = "";
+		 int cantProdVend = 0;
+		for (String nombreProdVend :mapaProductosVendidos.keySet()) {
+			if (nombreProdVend.getValue()==maxValueInMap) {
+				 
+				cantProdVend = entry.getValue();
+				nombreProdVend = entry.getKey();
+				
+                System.out.println("SOLUCIONI PRODUCTO VENDIDO"+cantProdVend+nombreProdVend);
+                // Print the key with max value
+            }
+			
+		}
+		
+		
+		
+		String cantidad = String.valueOf(cantProdVend);
+		return nombreProdVend+" "+cantidad;
+		
+	}
 	
 	public int porcentajeVentasActualAnterior() {
 		
