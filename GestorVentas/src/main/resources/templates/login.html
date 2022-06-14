@@ -23,33 +23,30 @@
 	<div class="box-form">
 		<div class="left">
 			<div class="overlay">
-				<h2>BIENVENIDO AL SISTEMA DE VENTAS</h2>
+				<h2>SISTEMA DE GESTIÓN LUXLIBERT</h2>
 				
-				<span>
-					<p>login with social media</p> <a href="#"><i
-						class="fa fa-facebook" aria-hidden="true"></i></a> <a href="#"><i
-						class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
-				</span>
 			</div>
 		</div>
 
 
 		<div class="right">
-			<h5>Login</h5>
-			
-			<div class="inputs">
-				<form th:action="@{/iniciarSesion}" th:method="post">
+			<h3>Iniciar Sesión</h3>
+			<label th:if="${erroLogin != null}" th:text="${errorLogin}"></label>
+			<div class="inputs pt-5">
+				<form th:action="@{/comprobarLogin}" th:method="post">
 					<input type="text" name="usuario" placeholder="user name" required> <br> 
 					<input type="password" name="clave" placeholder="password" required>
-					<button type="submit" style="margin-top: 20px">Login</button>
+					<button type="submit" style="margin-top: 20px">Iniciar sesión</button>
 				</form>
 			</div>
 			<br>
 			<br>
-			<label th:text="${error}"></label>
-
 			<br>
-			
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 		</div>
 
 	</div>

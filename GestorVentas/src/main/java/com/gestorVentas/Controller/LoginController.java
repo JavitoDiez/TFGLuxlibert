@@ -4,7 +4,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,33 +20,53 @@ public class LoginController {
 
 	@Autowired
 	AdministradorService adminService;
-	
-	
+
 	@GetMapping("/login")
 	public String login() {
+
+		return "login";
+	}
+
+	@GetMapping("/inicio")
+	public String inicio() {
+
+		return "index";
+	}
+
+	@GetMapping("/login?error=true")
+	public String errorLogin(Model model) {
+
+		String error="usuario o contraseña incorrecto";
 		
-		 
+		model.addAttribute("errorLogin",error);
+		
+		
 		return "login";
 	}
 	
 	
-	@PostMapping("/iniciarSesion")
-	public String registro(@RequestParam("usuario") String username, @RequestParam("clave") String password) {
-		
-		AdministradorSistema usuario = adminService.findByUser(username);
-		System.out.println("USUARIO ENCONTRADO" + usuario);
-		if(usuario.getClaveAdministrador() != password) {
-			
-			return "login";
-		}else if(usuario.getClaveAdministrador() == password) {
-			
-			
-			return "index";
-		}
-		
-		return null;
+	@GetMapping("/logout")
+	public String logout() {
 
+		return "login";
 	}
 	
-	
+
+	/*@PostMapping("/comprobarLogin")
+	public String registro(@RequestParam("usuario") String username, @RequestParam("clave") String password) {
+
+		AdministradorSistema usuario = adminService.findByUser(username);
+		System.out.println("USUARIO ENCONTRADO" + usuario);
+		if (usuario.getClaveAdministrador() != password) {
+
+			return "login";
+		} else if (usuario.getClaveAdministrador() == password) {
+
+			return "index";
+		}
+
+		return null;
+
+	}*/
+
 }

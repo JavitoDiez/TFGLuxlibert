@@ -27,6 +27,33 @@ public class AdministradorSistema {
 	@Column(name="clave_administrador")
 	@NonNull
 	private String claveAdministrador;
+	
+	@Column(name="role")
+	public String role;
+	
+	
+	
+
+	public String getRole() {
+		return role;
+	}
+
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
+
+	public AdministradorSistema(String usuario, String claveAdministrador, String role) {
+		super();
+		this.usuario = usuario;
+		this.claveAdministrador = claveAdministrador;
+		this.role = role;
+	}
+
+
 
 	public AdministradorSistema(int idAdministradorSistema, String usuario, String claveAdministrador) {
 		super();

@@ -1,8 +1,6 @@
 body {
-  background-image: linear-gradient(135deg, #EEC373 10%, #1B1A17 100%);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-color: white;
+  
   font-family: "Open Sans", sans-serif;
   color: #333333;
 }
@@ -32,8 +30,8 @@ body {
 }
 .box-form .left {
   color: #FFFFFF;
-  background-image:url(static/img/carteraDubai.jpeg);
-  background-size: cover;
+  background-image:url(static/img/logoLuxlibert.jpeg);
+  
   background-repeat: no-repeat;
   overflow: hidden;
 }
@@ -41,7 +39,9 @@ body {
   padding: 30px;
   width: 100%;
   height: 100%;
-  background: #5961f9ad;
+  background-image: URL(../img/carteraDubai.jpeg);
+  background-repeat: no-repeat;
+  
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -56,19 +56,8 @@ body {
   margin-top: 30px;
   font-weight: 900;
 }
-.box-form .left .overlay span a {
-  background: #3b5998;
-  color: #FFFFFF;
-  margin-top: 10px;
-  padding: 14px 50px;
-  border-radius: 100px;
-  display: inline-block;
-  box-shadow: 0 3px 6px 1px #042d4657;
-}
-.box-form .left .overlay span a:last-child {
-  background: #1dcaff;
-  margin-left: 30px;
-}
+
+
 .box-form .right {
   padding: 40px;
   overflow: hidden;
@@ -117,8 +106,8 @@ body {
   display: inline-block;
   border: 0;
   outline: 0;
-  box-shadow: 0px 4px 20px 0px #49c628a6;
-  background-image: linear-gradient(135deg, #70F570 10%, #49C628 100%);
+  box-shadow: 0px 4px 20px 0px #EEC373;
+  background-image: linear-gradient(135deg, #EEC373 10%, #EEC373 100%);
 }
 
 label {
@@ -132,7 +121,7 @@ label::before {
   position: absolute;
   font-family: FontAwesome;
   background: transparent;
-  border: 3px solid #70F570;
+  border: 3px solid #EEC373;
   border-radius: 4px;
   color: transparent;
   left: -30px;
@@ -144,11 +133,11 @@ label:hover::before {
   content: ' \f00c';
   color: #fff;
   cursor: pointer;
-  background: #70F570;
+  background: #EEC373;
 }
 
 label:hover::before .text-checkbox {
-  background: #70F570;
+  background: #EEC373;
 }
 
 label span.text-checkbox {
