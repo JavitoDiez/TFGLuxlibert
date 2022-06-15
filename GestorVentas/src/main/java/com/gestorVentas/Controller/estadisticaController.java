@@ -64,6 +64,7 @@ public class estadisticaController {
 		model.addAttribute("ventasRealizadas", ventasService.ventasRealizadasMesActual());
 		model.addAttribute("ventasRealizadasMesAnterior", this.porcentajeVentasActualAnterior());
 		model.addAttribute("ProductoMasVendido", this.productoMasVendido());
+		model.addAttribute("CantidadProductoMasVendido", this.CantidadproductoMasVendido());
 		model.addAttribute("simboloPorcentaje", simboloPorcentaje);
 		model.addAttribute("simboloEuro", simboloEuro);
 		
@@ -171,30 +172,46 @@ public class estadisticaController {
 		return datosGrafico;
 	}*/
 	//@GetMapping("/estadisticas")
+	
 	public String productoMasVendido() {
 		
-		Map<String,Integer> mapaProductosVendidos= ventasService.productosMasVendidos();
-		 int maxValueInMap=(Collections.max(mapaProductosVendidos.values()));
-		// String nombreProdVend = "";
-		 int cantProdVend = 0;
-		for (String nombreProdVend :mapaProductosVendidos.keySet()) {
-			if (nombreProdVend.getValue()==maxValueInMap) {
-				 
-				cantProdVend = entry.getValue();
-				nombreProdVend = entry.getKey();
-				
-                System.out.println("SOLUCIONI PRODUCTO VENDIDO"+cantProdVend+nombreProdVend);
-                // Print the key with max value
-            }
-			
-		}
+	Map<String, Integer> mapaProductosVendidos = ventasService.productosMasVendidos();	
+	 Entry<String, Integer> maxEntry = null;
+	    Integer max = Collections.max(mapaProductosVendidos.values());
+
+	    for(Entry<String, Integer> entry : mapaProductosVendidos.entrySet()) {
+	        Integer value = entry.getValue();
+	        if(null != value && max == value) {
+	            maxEntry = entry;
+	        }
+	    }
+	  String  nombreProducto= maxEntry.getKey()+" ";
+	
+	  
+	    return nombreProducto;
 		
-		
-		
-		String cantidad = String.valueOf(cantProdVend);
-		return nombreProdVend+" "+cantidad;
 		
 	}
+	
+	public Integer CantidadproductoMasVendido() {
+		
+		Map<String, Integer> mapaProductosVendidos = ventasService.productosMasVendidos();	
+		 Entry<String, Integer> maxEntry = null;
+		    Integer max = Collections.max(mapaProductosVendidos.values());
+
+		    for(Entry<String, Integer> entry : mapaProductosVendidos.entrySet()) {
+		        Integer value = entry.getValue();
+		        if(null != value && max == value) {
+		            maxEntry = entry;
+		        }
+		    }
+		 
+		  
+		  
+		    return maxEntry.getValue();
+			
+			
+		}
 	
 	public int porcentajeVentasActualAnterior() {
 		

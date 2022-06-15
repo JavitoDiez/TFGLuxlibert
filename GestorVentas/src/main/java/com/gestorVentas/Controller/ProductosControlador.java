@@ -80,25 +80,13 @@ public class ProductosControlador extends HttpServlet{
 	
 	
 	@GetMapping("/productos" )
-	public String listadoProductos(@RequestParam Map<String,Object> params,Model model){
+	public String listadoProductos(Model model){
 		
-		//CONDICIONAL 
-				int page=params.get("page") != null? Integer.valueOf(params.get("page").toString())-1:0;
-				
-				PageRequest pageRequest = PageRequest.of(page, 5);
-				Page<ProductoEnt> listaProductos = productoService.findAll(pageRequest);
-				
-				int totalPaginas = listaProductos.getTotalPages();
-				if(totalPaginas > 0) {
-					
-					List<Integer> paginas = IntStream.rangeClosed(1, totalPaginas).boxed().collect(Collectors.toList());
-					
-					model.addAttribute("paginas", paginas);
-				}
-				
-				model.addAttribute("productos", listaProductos.getContent());
+			
+				List<ProductoEnt> listaProductos = productoService.findAll();
+				model.addAttribute("productos", listaProductos);
 				System.out.println("listaPrdouctos: "+listaProductos.toString());
-				
+
 				
 				List<CategoriaProducto> listaCategoria  = categoriaProductoService.findAll();
 				model.addAttribute("categorias", listaCategoria);
@@ -108,7 +96,7 @@ public class ProductosControlador extends HttpServlet{
 				return "productos";
 	}
 	
-	@GetMapping("/")
+	/*@GetMapping("/")
 	public String listadoProductosPaginación (@RequestParam Map<String,Object> params,Model model) {
 		
 		//CONDICIONAL 
@@ -135,7 +123,7 @@ public class ProductosControlador extends HttpServlet{
 		System.out.println(listaCategoria);
 		
 		return "productos";
-	}
+	}*/
 	
 
 	

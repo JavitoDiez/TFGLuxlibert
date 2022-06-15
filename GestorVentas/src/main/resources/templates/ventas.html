@@ -86,8 +86,8 @@
 						</a>
 					</div>
 				</div>
-				<a href="/logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i>
-					<span class="nav_name">SignOut</span>
+				<a href="/logout" class="nav_link"> <i
+					class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
 				</a>
 			</nav>
 		</div>
@@ -102,20 +102,18 @@
 			<div class="container pt-4 ">
 				<div class="row">
 					<div class="text-center">
-						<form th:action="@{/ventas}" method="post">
+						<form th:action="@{/ventas}" method="POST">
 							<div>
-								<label>Desde</label> <input type="date" th:name="desde" required />
-								<label>Hasta</label> <input type="date" th:name="hasta" required />
+								<label>Desde</label> <input type="date" th:name="desdeVenta" required />
+								<label>Hasta</label> <input type="date" th:name="hastaVenta" required />
 								<button type="submit" id="boton" class="btn">Buscar</button>
-								<a href="/ventas" id="boton" class="btn" style="float: right;">Limpiar
-									Filtro</a>
 							</div>
-
+							<a th:href="@{/ventas}" id="boton" class="btn" style="float: right;">Limpiar
+									Filtro</a>
 						</form>
-						<!-- <a href="/venta/registrarVenta" class="btn" id="boton"
-							style="text-align: center; float: left; padding-left: 25px">REGISTRAR
-							COMPRA </a>-->
-
+						
+						
+			
 						<button id="boton" type="button" class="btn"
 							data-bs-toggle="modal" data-bs-target="#exampleModal"
 							style="float: left; padding-left: 25px">REGISTRAR VENTA</button>
@@ -124,19 +122,28 @@
 				</div>
 			</div>
 
+			<!--<div
+				class="text-center alert alert-success alert-dismissible fade show"
+				th:if="${mensaje != null}" style="width: 70%">
+				!Venta registrada con éxito!
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
 
-
-
-
-
+			<div
+				class="text-center alert alert-danger alert-dismissible fade show"
+				th:if="${mensaje == null}" style="width: 70%">
+				!No se puede realizar la venta, no hay suficente stock!
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>-->
 
 			<div class="container pt-3">
-
 				<div
 					class="text-center alert alert-success alert-dismissible fade show"
 					role="alert" th:if="${mensajeResultadoVentas != null}"
 					style="width: 70%">
-					!Se han encontrado : <label th:text="${numeroResultadosVentas}"></label>
+					Se han encontrado  <label th:text="${numeroResultadosVentas}"></label>
 					resultados
 					<button type="button" class="btn-close" data-bs-dismiss="alert"
 						aria-label="Close"></button>
@@ -156,7 +163,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="venta : ${listadoVentas}">
+							<tr th:each="venta : ${ventas}">
 								<td th:text="${venta.fechaVenta}"></td>
 								<td th:text="${venta.producto.nombreProducto}"></td>
 								<td th:text="${venta.producto.categoriaProducto.categoria}"></td>
@@ -165,21 +172,19 @@
 							</tr>
 						</tbody>
 					</table>
-					<!--<div class="row">
+					<div class="row">
 						<div class="col-md-2"></div>
 						<div class="col-md-8">
 							<nav aria-label="pagination">
-
-								<span th:each="i: ${#numbers.sequence(1, totalPages)}"> <a
-									th:href="@{'/compras/page/' + ${i}}">[[${i}]]</a> &nbsp; &nbsp;
-								</span>
-								<li class="page-item" th:each="pageCompra : ${paginasCompras}">
-										<a class="page-link" th:href="@{'compras/page/' + ${pageCompra}}"
-										th:text="${pageCompra}"></a>
+								<ul class="pagination justify-content-center">
+									<li class="page-item" th:each="page : ${paginas}">
+										<a class="page-link" th:href="@{|/?page=${page}|}" th:text="${page}"></a>
 									</li>
-
+								</ul>
 							</nav>
-						</div>-->
+						</div>
+						<div class="col-md-2"></div>
+					</div>
 					<div class="col-md-2"></div>
 				</div>
 			</div>
@@ -225,21 +230,7 @@
 							<button class="btn btn-success" type="submit">Agregar</button>
 						</div>
 
-						<div
-							class="text-center alert alert-success alert-dismissible fade show"
-							th:if="${cantidad <= stockProducto}" style="width: 70%">
-							!Venta registrada con éxito!
-							<button type="button" class="btn-close" data-bs-dismiss="alert"
-								aria-label="Close"></button>
-						</div>
-						
-						<div
-							class="text-center alert alert-danger alert-dismissible fade show"
-							th:if="${cantidad > stockProducto}" style="width: 70%">
-							!No se puede realizar la venta, no hay suficente stock!
-							<button type="button" class="btn-close" data-bs-dismiss="alert"
-								aria-label="Close"></button>
-						</div>
+
 
 					</form>
 				</div>
