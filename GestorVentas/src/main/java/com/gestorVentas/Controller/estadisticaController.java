@@ -73,6 +73,7 @@ public class estadisticaController {
 		model.addAttribute("cantidadVendida", ventasService.productosMasVendidos());
 		
 		
+		
 		return "estadisticas";
 	}
 	

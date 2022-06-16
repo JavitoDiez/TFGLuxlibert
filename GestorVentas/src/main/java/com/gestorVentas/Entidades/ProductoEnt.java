@@ -32,7 +32,7 @@ public class ProductoEnt {
 	private double precioVenta;
 	
 	@Column(name="precio_compra")
-	private float precioCompra;
+	private double precioCompra;
 	
 	@Column(name="stock",nullable=true)
 	private int stock;
@@ -55,7 +55,7 @@ public class ProductoEnt {
 		return precioCompra;
 	}
 
-	public void setPrecioCompra(float precioCompra) {
+	public void setPrecioCompra(double precioCompra) {
 		this.precioCompra = precioCompra;
 	}
 
@@ -113,7 +113,7 @@ public class ProductoEnt {
 	
 
 	public ProductoEnt(String nombreProducto, String descripcion, CategoriaProducto categoriaProducto,
-			double precioVenta, float precioCompra) {
+			double precioVenta, double precioCompra) {
 		super();
 		this.nombreProducto = nombreProducto;
 		this.descripcion = descripcion;

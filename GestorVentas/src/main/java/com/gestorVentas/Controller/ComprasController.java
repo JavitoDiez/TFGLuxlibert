@@ -252,25 +252,26 @@ public class ComprasController {
 					detalleCompra.setCantidad(carritoCompras.getCantidad());
 					detalleCompra.setImporteCompra(producto.getPrecioCompra() * carritoCompras.getCantidad());
 					System.out.println(detalleCompra.toString());
-
+					
 					// IMPORTE TOTAL
 
 					importeTotalCompra = carritoCompras.getImporte() + carritoCompras.getImporte();
 					
-					if(importeTotalCompra>100) {
-						
-						emailService.sendEmail(importeTotalCompra);
-					}
+					
 
 					detalle.add(detalleCompra);
 
 					model.addAttribute("detalleCompra", detalleCompra);
 
 					// Compra compra = new Compra(importeTotalCompra, detalleCompra);
+					
+					detalleService.insertar(detalle);
 
 					System.out.println(detalle.toString());
 					producto.setStock(producto.getStock() + carritoCompras.getCantidad());
 					productoService.actualizarProducto(producto);
+					
+					//emailService.sendEmail(producto.getPrecioCompra() * carritoCompras.getCantidad());
 
 				}
 			}
@@ -278,7 +279,7 @@ public class ComprasController {
 
 		}
 
-		detalleService.insertar(detalle);
+		
 
 		// comprasProductoService.realizarCompra(compra);
 

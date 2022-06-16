@@ -1,14 +1,18 @@
 package com.gestorVentas.Servicio;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gestorVentas.DAO.IDetalleCompra;
+import com.gestorVentas.Entidades.Compra;
 import com.gestorVentas.Entidades.DetalleCompra;
+import com.gestorVentas.Entidades.Proveedor;
 
 @Service
 public class DetalleCompraService implements IDetalleCompraService {
@@ -65,5 +69,7 @@ public class DetalleCompraService implements IDetalleCompraService {
 
 		return totalGastosCompras;
 	}
+	
+
 
 }

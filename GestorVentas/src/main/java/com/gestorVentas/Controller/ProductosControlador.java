@@ -139,7 +139,7 @@ public class ProductosControlador extends HttpServlet{
 		CategoriaProducto categoriaObj = categoriaProductoService.findByName(categoria);
 		
 		//EL PRECIO DE COMPRA ES UN 20% MENOS QUE EL DE VENTA
-		float precioCompra = (float) (precioVenta * 0.80);
+		Double precioCompra = (double) (precioVenta * 0.80);
 		
 		ProductoEnt producto = new ProductoEnt(nombreProducto,descripcion,categoriaObj,precioVenta,precioCompra);
 		System.out.println(producto.toString());

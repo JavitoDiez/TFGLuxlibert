@@ -1,6 +1,8 @@
 package com.gestorVentas.Servicio;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +54,7 @@ public class ProveedoresService implements IProveedoresService{
 		// TODO Auto-generated method stub
 		return proveedorRepository.findByName(nombre);
 	}
+	
+	
 
 }

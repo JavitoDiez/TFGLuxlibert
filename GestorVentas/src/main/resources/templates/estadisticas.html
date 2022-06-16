@@ -174,7 +174,7 @@
 								<i class="mdi mdi-poll-box text-success icon-lg"></i>
 							</div>
 							<div class="float-right">
-								<p class="mb-0 text-right">Beneficios</p>
+								<p class="mb-0 text-right">Ingresos-Gastos</p>
 								<div class="fluid-container">
 
 									<div th:if="${beneficios >0}">
@@ -270,7 +270,8 @@
 				},
 				vAxis : {
 					title : 'Unidades vendidas'
-				}
+				},
+				colors: ['#000', '#007329', '#AB0D06']	
 			};
 			var chart = new google.visualization.ColumnChart(document
 					.getElementById('chart_div'));
