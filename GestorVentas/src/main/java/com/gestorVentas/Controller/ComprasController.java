@@ -47,6 +47,9 @@ public class ComprasController {
 
 	@Autowired
 	private DetalleCompraService detalleService;
+	
+	@Autowired
+	private SendEmailService emailService;
 
 	@GetMapping("/compras")
 	public String listadoComprasPrincipal(Model model) {
@@ -253,6 +256,11 @@ public class ComprasController {
 					// IMPORTE TOTAL
 
 					importeTotalCompra = carritoCompras.getImporte() + carritoCompras.getImporte();
+					
+					if(importeTotalCompra>100) {
+						
+						emailService.sendEmail(importeTotalCompra);
+					}
 
 					detalle.add(detalleCompra);
 
