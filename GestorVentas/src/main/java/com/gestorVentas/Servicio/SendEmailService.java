@@ -20,7 +20,7 @@ public class SendEmailService {
 		mensaje.setFrom("javidigilarte@gmail.com");
 		mensaje.setTo("javitogilarte@gmail.com");
 		mensaje.setSubject("Alerta De Compra");
-		mensaje.setText("El sistema ha detectado una compra superior al límite establecido por la empresa\n"
+		mensaje.setText("El sistema ha detectado una compra superior al límite establecido\n"
 				+ "El monto total de la compra realizada es:  "+importeStr );
 		
 		
