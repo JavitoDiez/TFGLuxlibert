@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.gestorVentas.Entidades.Compra;
+
 import com.gestorVentas.Entidades.Venta;
 
 public interface IVentasService {

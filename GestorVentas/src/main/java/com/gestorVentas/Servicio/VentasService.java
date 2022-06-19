@@ -120,24 +120,25 @@ public class VentasService implements IVentasService {
 		return datosGrafica;
 
 	}
+
 	
+
 	public Map<String, Integer> productosMasVendidos() {
-		
-		
+
 		List<Venta> listadoVentas = ventasRepository.findAll();
 		List<Integer> listadoVentasTotales = new ArrayList<Integer>();
 
-		//Date ahora = new Date();
+		// Date ahora = new Date();
 		Map<String, Integer> datosGrafica = new TreeMap<>();
-	
+
 		int cantidad = 0;
-		
+
 		for (Venta venta : listadoVentas) {
 			int id = venta.getProducto().getIdProducto();
-				if (listadoVentasTotales.contains(id) == false) {
-					listadoVentasTotales.add(id);
-				}
-			
+			if (listadoVentasTotales.contains(id) == false) {
+				listadoVentasTotales.add(id);
+			}
+
 		}
 		System.out.println("LISTADO ID; " + listadoVentasTotales.toString());
 		List<Integer> listadoTotales = new ArrayList<Integer>();
@@ -160,15 +161,14 @@ public class VentasService implements IVentasService {
 
 		return datosGrafica;
 
-		
 	}
-	
+
 	public Map<String, Double> ingresosProductoByMes(Date date) {
 
 		List<Venta> listadoVentas = ventasRepository.findAll();
 		List<Integer> listadoVentasTotales = new ArrayList<Integer>();
 
-		//Date ahora = new Date();
+		// Date ahora = new Date();
 		SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
 		formateador.format(date);
 		Calendar fechaSeleccionadaUsuario = Calendar.getInstance();
@@ -176,12 +176,11 @@ public class VentasService implements IVentasService {
 		fechaSeleccionadaUsuario.setTime(date);
 
 		int mesElegido = fechaSeleccionadaUsuario.get(Calendar.MONTH);
-		
-		
+
 		Map<String, Double> datosGrafica = new TreeMap<>();
 		double cantidadTotal = 0.0;
 		double importe = 0.0;
-		
+
 		for (Venta venta : listadoVentas) {
 			int id = venta.getProducto().getIdProducto();
 			if (mesElegido == venta.getFechaVenta().getMonth()) {
@@ -214,7 +213,6 @@ public class VentasService implements IVentasService {
 
 	}
 
-	
 	public Double totalIngresosVentas() {
 		List<Venta> listadoVentas = ventasRepository.findAll();
 
@@ -279,7 +277,7 @@ public class VentasService implements IVentasService {
 			}
 
 		}
-System.out.println("Ventas Mes anterior"+ventasRealizadas);
+		System.out.println("Ventas Mes anterior" + ventasRealizadas);
 		return ventasRealizadas;
 
 	}

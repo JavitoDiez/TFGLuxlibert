@@ -15,17 +15,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gestorVentas.Entidades.Compra;
 import com.gestorVentas.Entidades.DetalleCompra;
-import com.gestorVentas.Entidades.ProductoEnt;
+import com.gestorVentas.Entidades.Producto;
 import com.gestorVentas.Entidades.Venta;
 import com.gestorVentas.Servicio.DetalleCompraService;
 import com.gestorVentas.Servicio.ProductoService;
 import com.gestorVentas.Servicio.VentasService;
 
 @Controller
-public class estadisticaController {
+public class EstadisticaController {
 
 	@Autowired
 	VentasService ventasService;
@@ -102,77 +103,6 @@ public class estadisticaController {
 		return datosGrafica;
 	}
 	
-	
-	
-	
-	
-	/*public Map<String, TreeMap<Double, Double>> ingresoGastoTrimestre() {
-		
-		List<Venta> listadoVentas = ventasService.findAll();
-		
-		List<DetalleCompra> listadoCompras = compraService.findAll();
-		double totalComprasTrimestre1 = 0.0;
-		double totalComprasTrimestre2 = 0.0;
-		double totalComprasTrimestre3 = 0.0;
-		double totalComprasTrimestre4 = 0.0;
-		
-		double totalVentasTrimestre1 = 0.0;
-		double totalVentasTrimestre2 = 0.0;
-		double totalVentasTrimestre3 = 0.0;
-		double totalVentasTrimestre4 = 0.0;
-		
-		Map<String, TreeMap<Double,Double>> datosGrafico  =new TreeMap<>();
-		
-		TreeMap<Double,Double> ventasComprasTrimestres = new TreeMap<>();
-	
-		for (Venta venta : listadoVentas) {
-			
-			for (DetalleCompra compra : listadoCompras) {
-				
-				if(venta.getFechaVenta().getMonth()>=1 || venta.getFechaVenta().getMonth() <=3 ) {
-					totalVentasTrimestre1 += venta.getImporteVenta();
-					totalComprasTrimestre1 +=  compra.getImporteCompra();
-					
-					
-				}else if (venta.getFechaVenta().getMonth()>=4 || venta.getFechaVenta().getMonth() <=6 ) {
-					totalVentasTrimestre2 += venta.getImporteVenta();
-					totalComprasTrimestre2 +=  compra.getImporteCompra();
-					
-					
-				}else if (venta.getFechaVenta().getMonth()>=7 || venta.getFechaVenta().getMonth() <=9 ) {
-					totalVentasTrimestre3 += venta.getImporteVenta();
-					totalComprasTrimestre3 +=  compra.getImporteCompra();
-					
-				}else if (venta.getFechaVenta().getMonth()>=10 || venta.getFechaVenta().getMonth() <= 12 ) {
-					
-					totalVentasTrimestre4 += venta.getImporteVenta();
-					totalComprasTrimestre4 +=  compra.getImporteCompra();
-					
-				}
-				
-				
-			}
-			
-			
-			
-		}
-		
-		ventasComprasTrimestres.put(totalVentasTrimestre1, totalComprasTrimestre1) ;
-		ventasComprasTrimestres.put(totalVentasTrimestre2, totalComprasTrimestre2) ;
-		ventasComprasTrimestres.put(totalVentasTrimestre3, totalComprasTrimestre3) ;
-		ventasComprasTrimestres.put(totalVentasTrimestre4, totalComprasTrimestre4) ;
-		
-		datosGrafico.put("Trimestre 1", ventasComprasTrimestres);
-		datosGrafico.put("Trimestre 2", ventasComprasTrimestres);
-		datosGrafico.put("Trimestre 3", ventasComprasTrimestres);
-		datosGrafico.put("Trimestre 4", ventasComprasTrimestres);
-		
-		
-
-		
-		return datosGrafico;
-	}*/
-	//@GetMapping("/estadisticas")
 	
 	public String productoMasVendido() {
 		

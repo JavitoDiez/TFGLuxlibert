@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gestorVentas.Entidades.CategoriaProducto;
-import com.gestorVentas.Entidades.ProductoEnt;
+import com.gestorVentas.Entidades.Producto;
 import com.gestorVentas.Entidades.Proveedor;
 import com.gestorVentas.Servicio.ProveedoresService;
 

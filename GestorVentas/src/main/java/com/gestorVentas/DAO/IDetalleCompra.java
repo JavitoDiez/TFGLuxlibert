@@ -17,4 +17,6 @@ public interface IDetalleCompra extends JpaRepository<DetalleCompra, Integer>{
 	
 	@Query(value="SELECT * FROM detalle_compra ORDER BY fecha_compra DESC LIMIT 5",nativeQuery = true)
 	public List<DetalleCompra> findAllLimitFive();
+	
+	public List<DetalleCompra> findByProductos(Producto Producto);
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 public class CarritoCompras {
 
 	
-	private ProductoEnt productoEnt;
+	private Producto productoEnt;
 	
 	private int Cantidad;
 	
@@ -15,11 +15,11 @@ public class CarritoCompras {
 	
 	private double importe;
 
-	public ProductoEnt getProductoEnt() {
+	public Producto getProductoEnt() {
 		return productoEnt;
 	}
 
-	public void setProductoEnt(ProductoEnt productoEnt) {
+	public void setProductoEnt(Producto productoEnt) {
 		this.productoEnt = productoEnt;
 	}
 
@@ -55,7 +55,7 @@ public class CarritoCompras {
 		this.importe = importe;
 	}
 
-	public CarritoCompras(ProductoEnt productoEnt, int cantidad, Proveedor proveedor, Date fecha, double importe) {
+	public CarritoCompras(Producto productoEnt, int cantidad, Proveedor proveedor, Date fecha, double importe) {
 		super();
 		this.productoEnt = productoEnt;
 		Cantidad = cantidad;

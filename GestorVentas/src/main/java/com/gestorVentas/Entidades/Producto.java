@@ -6,7 +6,7 @@ import javax.validation.constraints.*;
 
 @Entity
 @Table(name="productos_acabados")
-public class ProductoEnt {
+public class Producto {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -95,11 +95,11 @@ public class ProductoEnt {
 		this.stock = stock;
 	}
 
-	public ProductoEnt() {
+	public Producto() {
 		super();
 	}
 
-	public ProductoEnt(int idProducto, String nombreProducto, String descripcion, CategoriaProducto categoriaProducto,
+	public Producto(int idProducto, String nombreProducto, String descripcion, CategoriaProducto categoriaProducto,
 			double precioVenta, int stock) {
 		super();
 		this.idProducto = idProducto;
@@ -112,7 +112,7 @@ public class ProductoEnt {
 	
 	
 
-	public ProductoEnt(String nombreProducto, String descripcion, CategoriaProducto categoriaProducto,
+	public Producto(String nombreProducto, String descripcion, CategoriaProducto categoriaProducto,
 			double precioVenta, double precioCompra) {
 		super();
 		this.nombreProducto = nombreProducto;
@@ -122,7 +122,7 @@ public class ProductoEnt {
 		this.precioCompra = precioCompra;
 	}
 
-	public ProductoEnt(String nombreProducto, String descripcion, CategoriaProducto categoriaProducto,
+	public Producto(String nombreProducto, String descripcion, CategoriaProducto categoriaProducto,
 			double precioVenta, int stock) {
 		super();
 		this.nombreProducto = nombreProducto;

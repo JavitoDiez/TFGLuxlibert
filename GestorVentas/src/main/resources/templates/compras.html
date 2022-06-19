@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>Compras | Luxlibert</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -84,8 +84,8 @@
 						</a>
 					</div>
 				</div>
-				<a href="/logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i>
-					<span class="nav_name">SignOut</span>
+				<a href="/logout" class="nav_link"> <i
+					class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
 				</a>
 			</nav>
 		</div>
@@ -103,14 +103,16 @@
 
 			<div class="container pt-4 ">
 				<div class="row">
-					<div class="text-center">
+					<div class=" text-center">
 						<form th:action="@{/compras}" method="post">
 							<div>
 								<label>Desde</label> <input type="date" th:name="desde" required />
 								<label>Hasta</label> <input type="date" th:name="hasta" required />
-								<button type="submit" id="boton" class="btn">Buscar</button>
-								<a href="/compras" id="boton" class="btn" style="float: right;">Limpiar
-									Filtro</a>
+								<div>
+									<button type="submit" id="boton" class="btn">Buscar</button>
+									<a href="/compras" id="boton" class="btn" style="float: right;">Limpiar
+										Filtro</a>
+								</div>
 							</div>
 
 
@@ -123,11 +125,14 @@
 			</div>
 
 
-			<div class="container pt-3">
 
-				<div class="text-center alert alert-success alert-dismissible fade show"
+
+			<div class="container pt-3">
+				<div
+					class="text-center alert alert-success alert-dismissible fade show"
 					role="alert" th:if="${mensajeResultado != null}" style="width: 70%">
-					!Se han encontrado :  <label th:text="${numeroResultados}"></label>  resultados
+					!Se han encontrado : <label th:text="${numeroResultados}"></label>
+					resultados
 					<button type="button" class="btn-close" data-bs-dismiss="alert"
 						aria-label="Close"></button>
 				</div>

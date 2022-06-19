@@ -26,19 +26,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gestorVentas.Entidades.*;
 import com.gestorVentas.Servicio.*;
-import com.gestorVentas.Servicio.ComprasProductoService;
-import com.gestorVentas.Servicio.MateriaPrimaService;
+
+
 import com.gestorVentas.Servicio.ProveedoresService;
 
 @Controller
 public class ComprasController {
 
-	private static final ProductoEnt ProductoEnt = null;
-	@Autowired
-	private ComprasProductoService comprasProductoService;
-	@Autowired
-	private MateriaPrimaService materiaPrimaService;
-
+	private static final Producto ProductoEnt = null;
+	
 	@Autowired
 	private ProveedoresService proveedoresService;
 
@@ -62,37 +58,7 @@ public class ComprasController {
 
 	}
 
-	/*
-	 * @GetMapping("/compras/page/{pageCompra}") public String
-	 * listadoCompras(@PathVariable("pageCompra") int currentPage,Model model){
-	 * 
-	 * 
-	 * Page<Compra> listaCompras = comprasProductoService.findAll(currentPage);
-	 * 
-	 * int totalPages = listaCompras.getTotalPages(); long totalItems =
-	 * listaCompras.getTotalElements();
-	 * 
-	 * model.addAttribute("compras", listaCompras.getContent());
-	 * model.addAttribute("totalPages", totalPages);
-	 * model.addAttribute("totalItems", totalItems);
-	 * 
-	 * System.out.println("listaCompra: "+listaCompras.toString());
-	 * 
-	 * 
-	 * 
-	 * List<MateriaPrima> listadoMaterias = materiaPrimaService.findAll();
-	 * 
-	 * model.addAttribute("materiasPrimas", listadoMaterias);
-	 * 
-	 * List<Proveedor> listadoProveedores = proveedoresService.findAll();
-	 * model.addAttribute("proveedores", listadoProveedores);
-	 * 
-	 * 
-	 * 
-	 * return "/compras";
-	 * 
-	 * }
-	 */
+
 
 	@PostMapping("/realizarCompra")
 	public String hacerCompra(@RequestParam("fechaCompra") Date fechaCompra,
@@ -103,7 +69,7 @@ public class ComprasController {
 
 		Proveedor proveedor = proveedoresService.findByName(nombreProveedor);
 
-		ProductoEnt producto = productoService.findByName(nombreProducto);
+		Producto producto = productoService.findByName(nombreProducto);
 
 		System.out.println("MATERIA PRIMA :" + producto.toString());
 
@@ -131,9 +97,9 @@ public class ComprasController {
 
 		Proveedor proveedor = proveedoresService.findByName(nombreProveedor);
 
-		List<ProductoEnt> producto = productoService.findListByName(nombreProducto);
+		List<Producto> producto = productoService.findListByName(nombreProducto);
 
-		for (ProductoEnt productoEnt : producto) {
+		for (Producto productoEnt : producto) {
 
 			Double importeCompra = productoEnt.getPrecioCompra()*cantidad;
 			
@@ -190,15 +156,33 @@ public class ComprasController {
 		}
 
 	}
+	
+	
+	@PostMapping("/findByProducto")
+	public String BusquedaPorProducto (@RequestParam("producto") String nombreProducto,Model model) {
+		
+		Producto producto = productoService.findByName(nombreProducto);
+		
+		System.out.println("BUSQUEDA PROD "+ producto.toString());
+		
+		List<DetalleCompra> listadoCompras = detalleService.findByProduct(producto);
+		
+		System.out.println("LISTADO COMPRAS POR PROD"+ listadoCompras.toString());
+		
+		model.addAttribute("compras",listadoCompras);
+		
+		
+		return "compras";
+	}
 
-	public ProductoEnt editarStockProducto() {
+	public Producto editarStockProducto() {
 
 		return ProductoEnt;
 	}
 
 	public void rellenarCombos(Model model) {
 
-		List<ProductoEnt> listadoProductos = productoService.findAll();
+		List<Producto> listadoProductos = productoService.findAll();
 
 		model.addAttribute("productos", listadoProductos);
 
@@ -244,7 +228,7 @@ public class ComprasController {
 
 					DetalleCompra detalleCompra = new DetalleCompra();
 
-					ProductoEnt producto = carritoCompras.getProductoEnt();
+					Producto producto = carritoCompras.getProductoEnt();
 
 					detalleCompra.setProductos(carritoCompras.getProductoEnt());
 					detalleCompra.setProveedores(carritoCompras.getProveedor());
@@ -286,4 +270,8 @@ public class ComprasController {
 		return "redirect:/compras";
 
 	}
+	
+
+	
 }
+

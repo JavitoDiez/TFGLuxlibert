@@ -29,7 +29,7 @@ public class DetalleCompra {
 	@ManyToOne
 	@JoinColumn(name="id_producto_pk",nullable=false)
 	@NotNull(message = "Selecciona la categoria del producto")
-	private ProductoEnt productos;
+	private Producto productos;
 	
 	
 	@ManyToOne
@@ -63,11 +63,11 @@ public class DetalleCompra {
 		this.idDetalleCompra = idDetalleCompra;
 	}
 
-	public ProductoEnt getProductos() {
+	public Producto getProductos() {
 		return productos;
 	}
 
-	public void setProductos(ProductoEnt listaProductos) {
+	public void setProductos(Producto listaProductos) {
 		this.productos = listaProductos;
 	}
 

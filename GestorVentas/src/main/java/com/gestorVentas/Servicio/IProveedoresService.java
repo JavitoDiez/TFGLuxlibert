@@ -3,7 +3,7 @@ package com.gestorVentas.Servicio;
 import java.util.List;
 import java.util.Optional;
 
-import com.gestorVentas.Entidades.ProductoEnt;
+import com.gestorVentas.Entidades.Producto;
 import com.gestorVentas.Entidades.Proveedor;
 
 public interface IProveedoresService {

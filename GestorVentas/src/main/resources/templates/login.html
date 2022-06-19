@@ -18,39 +18,36 @@
 
 </head>
 <body>
+	<div class= "login" style="margin: auto; height: 100%">
+		<!-- partial:index.partial.html -->
+		<div class="box-form">
+			<div class="left">
+				<div class="overlay">
+					<h2>SISTEMA DE GESTIÓN LUXLIBERT</h2>
 
-	<!-- partial:index.partial.html -->
-	<div class="box-form">
-		<div class="left">
-			<div class="overlay">
-				<h2>SISTEMA DE GESTIÓN LUXLIBERT</h2>
-				
+				</div>
 			</div>
-		</div>
 
 
-		<div class="right">
-			<h3>Iniciar Sesión</h3>
-			<label th:if="${erroLogin != null}" th:text="${errorLogin}"></label>
-			<div class="inputs pt-5">
-				<form th:action="@{/comprobarLogin}" th:method="post">
-					<input type="text" name="usuario" placeholder="user name" required> <br> 
-					<input type="password" name="clave" placeholder="password" required>
-					<button type="submit" style="margin-top: 20px">Iniciar sesión</button>
-				</form>
+			<div class="right">
+				<h3>Iniciar Sesión</h3>
+				<label th:if="${erroLogin != null}" th:text="Contraseña o username incorrecto"></label>
+				<div class="inputs pt-5">
+					<form th:action="@{/comprobarLogin}" th:method="post">
+						<input type="text" name="usuario" placeholder="user name" required>
+						<br> <input type="password" name="clave"
+							placeholder="password" required>
+						<button type="submit" style="margin-top: 20px">Iniciar
+							sesión</button>
+					</form>
+				</div>
+				<br> <br> <br> <br> <br> <br> <br>
+				<br>
 			</div>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-		</div>
 
+		</div>
+		<!-- partial -->
 	</div>
-	<!-- partial -->
-
+	
 </body>
 </html>

@@ -33,7 +33,7 @@ public class LoginController {
 		return "index";
 	}
 
-	@GetMapping("/login?error=true")
+	@GetMapping("/login?error")
 	public String errorLogin(Model model) {
 
 		String error="usuario o contraseña incorrecto";

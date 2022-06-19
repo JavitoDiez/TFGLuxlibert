@@ -26,7 +26,7 @@ public class Venta {
 	
 	@ManyToOne
 	@JoinColumn(name="id_producto")
-	private ProductoEnt producto;
+	private Producto producto;
 
 
 	public int getIdVenta() {
@@ -69,17 +69,17 @@ public class Venta {
 	}
 
 
-	public ProductoEnt getProducto() {
+	public Producto getProducto() {
 		return producto;
 	}
 
 
-	public void setProducto(ProductoEnt producto) {
+	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
 
 
-	public Venta(double importeVenta, Date fechaVenta, int cantidadProductoVendido, ProductoEnt producto) {
+	public Venta(double importeVenta, Date fechaVenta, int cantidadProductoVendido, Producto producto) {
 		super();
 		this.importeVenta = importeVenta;
 		this.fechaVenta = fechaVenta;
@@ -94,7 +94,7 @@ public class Venta {
 	}
 
 
-	public Venta(int idVenta, double importeVenta, Date fechaVenta, int cantidadProductoVendido, ProductoEnt producto) {
+	public Venta(int idVenta, double importeVenta, Date fechaVenta, int cantidadProductoVendido, Producto producto) {
 		super();
 		this.idVenta = idVenta;
 		this.importeVenta = importeVenta;

@@ -21,5 +21,7 @@ public interface IDetalleCompraService {
 	public List<DetalleCompra> findAllLimitFive();
 	
 	Double totalGastosCompras();
+	
+	public List<DetalleCompra> findByProduct (Producto producto);
 
 }

@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gestorVentas.Entidades.CategoriaProducto;
 import com.gestorVentas.Entidades.DetalleCompra;
-import com.gestorVentas.Entidades.ProductoEnt;
+import com.gestorVentas.Entidades.Producto;
 import com.gestorVentas.Entidades.Venta;
 import com.gestorVentas.Servicio.ProductoService;
 import com.gestorVentas.Servicio.VentasService;
@@ -78,10 +78,10 @@ public class VentasController {
 	public String registrarVenta(Model model, @RequestParam("fechaVenta") Date fechaVenta,
 			@RequestParam("producto") String nombreProducto, @RequestParam("cantidad") int cantidad) {
 
-		List<ProductoEnt> producto = productoService.findListByName(nombreProducto);
+		List<Producto> producto = productoService.findListByName(nombreProducto);
 		
 		int stockProducto = 0;
-		for (ProductoEnt productoEnt : producto) {
+		for (Producto productoEnt : producto) {
 
 			Double importeVenta = productoEnt.getPrecioVenta() * cantidad;
 			stockProducto = productoEnt.getStock();

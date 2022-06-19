@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>Dashboard | Luxlibert</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -85,15 +85,15 @@
 						</a>
 					</div>
 				</div>
-				<a href="/logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i>
-					<span class="nav_name">SignOut</span>
+				<a href="/logout" class="nav_link"> <i
+					class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
 				</a>
 			</nav>
 		</div>
 	</div>
 
 	<!-- CUATRO CARDS PEQUEÑAS -->
-	<section style="padding-top: 100px; background-color: e1e9f4" >
+	<section style="padding-top: 100px; background-color: e1e9f4">
 		<div class="row">
 			<div
 				class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
@@ -115,9 +115,7 @@
 								</div>
 							</div>
 						</div>
-						<p class="text-muted mt-3 mb-0">
-							
-						</p>
+						<p class="text-muted mt-3 mb-0"></p>
 					</div>
 				</div>
 			</div>
@@ -194,8 +192,8 @@
 							</div>
 						</div>
 						<p class="text-muted mt-3 mb-0">
-							<i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> 
-						
+							<i class="mdi mdi-calendar mr-1" aria-hidden="true"></i>
+
 						</p>
 					</div>
 				</div>
@@ -211,13 +209,15 @@
 							<div class="float-right">
 								<p class="mb-0 text-right">Producto más vendido</p>
 								<div class="fluid-container">
-									<h5 class="font-weight-medium text-right mb-0" th:text="${ProductoMasVendido}"></h5>
+									<h5 class="font-weight-medium text-right mb-0"
+										th:text="${ProductoMasVendido}"></h5>
 								</div>
 							</div>
 						</div>
 						<p class="text-muted mt-3 mb-0">
-							<i class="mdi mdi-reload mr-1" aria-hidden="true" th:text="${CantidadProductoMasVendido}+ ' /uds'"></i>
-							
+							<i class="mdi mdi-reload mr-1" aria-hidden="true"
+								th:text="${CantidadProductoMasVendido}+ ' /uds'"></i>
+
 						</p>
 					</div>
 				</div>
@@ -227,14 +227,14 @@
 	<!-- ESTADISTICAS -->
 
 
-	<div class="pt-5" align="center" >
+	<div class="pt-5" align="center">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
 					<div id="piechart" style="width: 700px; height: 300px;"></div>
 				</div>
 
-				<div class="ml-2 col-md-6">
+				<div class="ml-2 col-md-6 col-sm-12">
 					<div id="chart_div" style="width: 700px; height: 300px;"></div>
 				</div>
 			</div>
@@ -242,6 +242,31 @@
 
 
 	</div>
+
+	<!-- <div class="containet text-center">
+
+		<form th:action="@{/estadisticas}" th:method="post">
+			<select id="month" name="month"
+				class="select_month cart_select italic light" />
+			<option selected hidden>Mes</option>
+			<option value="01">Enero</option>
+			<option value="02">Febrero</option>
+			<option value="03">Marzo</option>
+			<option value="04">Abril</option>
+			<option value="05">Mayo</option>
+			<option value="06">Junio</option>
+			<option value="07">Julio</option>
+			<option value="08">Agosto</option>
+			<option value="09">Septiembre</option>
+			<option value="10">Octubre</option>
+			<option value="11">Noviembre</option>
+			<option value="12">Diciembre</option>
+			</select>
+
+			<button type="submit">Representar Grafico</button>
+		</form>
+
+	</div> -->
 
 
 	<script th:inline="javascript">
@@ -271,7 +296,7 @@
 				vAxis : {
 					title : 'Unidades vendidas'
 				},
-				colors: ['#000', '#007329', '#AB0D06']	
+				colors : [ '#000', '#007329', '#AB0D06' ]
 			};
 			var chart = new google.visualization.ColumnChart(document
 					.getElementById('chart_div'));

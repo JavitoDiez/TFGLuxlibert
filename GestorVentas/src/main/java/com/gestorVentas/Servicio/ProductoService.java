@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.gestorVentas.DAO.IProductosRepository;
-import com.gestorVentas.Entidades.ProductoEnt;
+import com.gestorVentas.Entidades.Producto;
 
 @Service
 public class ProductoService implements IProductoService{
@@ -18,50 +18,50 @@ public class ProductoService implements IProductoService{
 	IProductosRepository productosRepository;
 
 	@Override
-	public Page<ProductoEnt> findAll(Pageable pageable) {
+	public Page<Producto> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
 		
 		return productosRepository.findAll(pageable);
 	}
 
 	@Override
-	public ProductoEnt insertarProducto(ProductoEnt productoEnt) {
+	public Producto insertarProducto(Producto productoEnt) {
 		// TODO Auto-generated method stub
 		return productosRepository.save(productoEnt);
 	}
 
 	@Override
-	public void borrarProducto(ProductoEnt productoEnt) {
+	public void borrarProducto(Producto productoEnt) {
 		// TODO Auto-generated method stub
 		productosRepository.delete(productoEnt);
 	}
 
 	@Override
-	public Optional<ProductoEnt> findById(int idProducto) {
+	public Optional<Producto> findById(int idProducto) {
 		// TODO Auto-generated method stub
 		return productosRepository.findById(idProducto);
 	}
 
 	@Override
-	public ProductoEnt actualizarProducto(ProductoEnt productoEnt) {
+	public Producto actualizarProducto(Producto productoEnt) {
 		
 		return productosRepository.save(productoEnt);
 	}
 
 	@Override
-	public ProductoEnt findByName(String nombre) {
+	public Producto findByName(String nombre) {
 		// TODO Auto-generated method stub
 		return productosRepository.findByName(nombre);
 	}
 	
 	@Override
-	public List<ProductoEnt> findListByName(String nombre) {
+	public List<Producto> findListByName(String nombre) {
 		// TODO Auto-generated method stub
-		return (List<ProductoEnt>) productosRepository.findListByName(nombre);
+		return (List<Producto>) productosRepository.findListByName(nombre);
 	}
 
 	@Override
-	public List<ProductoEnt> findAll() {
+	public List<Producto> findAll() {
 		// TODO Auto-generated method stub
 		return productosRepository.findAll();
 	}

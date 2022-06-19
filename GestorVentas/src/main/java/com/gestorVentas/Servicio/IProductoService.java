@@ -7,25 +7,25 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.gestorVentas.Entidades.ProductoEnt;
+import com.gestorVentas.Entidades.Producto;
 
 public interface IProductoService {
 
 	
-	public Page<ProductoEnt> findAll(Pageable pageable);
-	public List<ProductoEnt> findAll();
+	public Page<Producto> findAll(Pageable pageable);
+	public List<Producto> findAll();
 	
-	public ProductoEnt insertarProducto(ProductoEnt productoEnt);
+	public Producto insertarProducto(Producto productoEnt);
 	
-	public void borrarProducto(ProductoEnt productoEnt);
+	public void borrarProducto(Producto productoEnt);
 	
-	public Optional<ProductoEnt> findById(int idProducto);
+	public Optional<Producto> findById(int idProducto);
 	
-	public ProductoEnt actualizarProducto(ProductoEnt productoEnt);
+	public Producto actualizarProducto(Producto productoEnt);
 	
-	public ProductoEnt findByName(String nombre);
+	public Producto findByName(String nombre);
 	
-	List<ProductoEnt> findListByName(String nombre);
+	List<Producto> findListByName(String nombre);
 	
 	
 	

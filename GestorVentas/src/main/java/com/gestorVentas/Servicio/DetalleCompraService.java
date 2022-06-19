@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gestorVentas.DAO.IDetalleCompra;
-import com.gestorVentas.Entidades.Compra;
+
 import com.gestorVentas.Entidades.DetalleCompra;
+import com.gestorVentas.Entidades.Producto;
 import com.gestorVentas.Entidades.Proveedor;
 
 @Service
@@ -71,5 +72,11 @@ public class DetalleCompraService implements IDetalleCompraService {
 	}
 	
 
+
+@Override
+public List<DetalleCompra> findByProduct(Producto producto) {
+	// TODO Auto-generated method stub
+	return detalleCompraService.findByProductos(producto);
+}
 
 }
