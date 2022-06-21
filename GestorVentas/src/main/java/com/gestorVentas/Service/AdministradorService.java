@@ -1,12 +1,12 @@
-package com.gestorVentas.Servicio;
+package com.gestorVentas.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 
 import org.springframework.stereotype.Service;
 
-import com.gestorVentas.DAO.IAdministradorSistema;
-import com.gestorVentas.Entidades.AdministradorSistema;
+import com.gestorVentas.Model.AdministradorSistema;
+import com.gestorVentas.Repository.IAdministradorSistema;
 
 @Service
 public class AdministradorService implements IAdministrador{

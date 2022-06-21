@@ -185,17 +185,17 @@
 										<th>Producto</th>
 										<th>Proveedor</th>
 										<th>Cantidad</th>
-										<th>Importe</th>
+										<th>Importe Unidad</th>
 										<th>Fecha</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr th:each="carrito, iterador : ${carrito}">
-										<td th:text="${iterador.index}"></td>
+										<td th:text="${iterador.index}+1"></td>
 										<td th:text="${carrito.productoEnt.nombreProducto}"></td>
 										<td th:text="${carrito.proveedor.nombreProveedor}"></td>
 										<td th:text="${carrito.cantidad}"></td>
-										<td th:text="${carrito.importe}"></td>
+										<td th:text="${carrito.importe}+ ' €/ud'"></td>
 										<td th:text="${carrito.fecha}"></td>
 								</tbody>
 							</table>

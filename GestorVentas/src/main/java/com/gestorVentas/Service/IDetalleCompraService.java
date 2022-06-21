@@ -1,10 +1,10 @@
-package com.gestorVentas.Servicio;
+package com.gestorVentas.Service;
 
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
-import com.gestorVentas.Entidades.*;
+import com.gestorVentas.Model.*;
 
 public interface IDetalleCompraService {
 

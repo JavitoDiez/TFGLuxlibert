@@ -1,4 +1,4 @@
-package com.gestorVentas.Servicio;
+package com.gestorVentas.Service;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.gestorVentas.Entidades;
+package com.gestorVentas.Model;
 
 import java.util.Date;
 import java.util.List;

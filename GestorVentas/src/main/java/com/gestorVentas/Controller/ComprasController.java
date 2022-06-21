@@ -24,11 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.gestorVentas.Entidades.*;
-import com.gestorVentas.Servicio.*;
-
-
-import com.gestorVentas.Servicio.ProveedoresService;
+import com.gestorVentas.Model.*;
+import com.gestorVentas.Service.*;
 
 @Controller
 public class ComprasController {

@@ -25,12 +25,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gestorVentas.Entidades.CategoriaProducto;
-
-import com.gestorVentas.Entidades.Producto;
-import com.gestorVentas.Servicio.CategoriaProductoService;
-
-import com.gestorVentas.Servicio.ProductoService;
+import com.gestorVentas.Model.CategoriaProducto;
+import com.gestorVentas.Model.Producto;
+import com.gestorVentas.Service.CategoriaProductoService;
+import com.gestorVentas.Service.ProductoService;
 
 @Controller
 public class ProductosControlador extends HttpServlet {
@@ -145,6 +143,7 @@ public class ProductosControlador extends HttpServlet {
 		// productoModificado.setCategoriaProducto(producto.getCategoriaProducto());
 		productoModificado.setPrecioVenta(precioVenta);
 		productoModificado.setDescripcion(producto.getDescripcion());
+		productoModificado.setPrecioCompra(precioVenta*0.80);
 
 		productoService.insertarProducto(productoModificado);
 

@@ -1,4 +1,4 @@
-package com.gestorVentas.DAO;
+package com.gestorVentas.Repository;
 
 import java.util.Date;
 import java.util.List;
@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-
-import com.gestorVentas.Entidades.Venta;
+import com.gestorVentas.Model.Venta;
 
 public interface IVentasRepository extends JpaRepository<Venta, Integer>{
 

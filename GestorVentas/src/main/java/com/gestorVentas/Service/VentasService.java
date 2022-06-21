@@ -1,4 +1,4 @@
-package com.gestorVentas.Servicio;
+package com.gestorVentas.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,8 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.gestorVentas.DAO.IVentasRepository;
-import com.gestorVentas.Entidades.Venta;
+import com.gestorVentas.Model.Venta;
+import com.gestorVentas.Repository.IVentasRepository;
 
 @Service
 public class VentasService implements IVentasService {

@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.gestorVentas.Servicio.AdministradorService;
+import com.gestorVentas.Service.AdministradorService;
 
 @Configuration
 @EnableWebSecurity

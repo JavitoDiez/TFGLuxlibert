@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gestorVentas.Entidades.CategoriaProducto;
-import com.gestorVentas.Entidades.Producto;
-import com.gestorVentas.Entidades.Proveedor;
-import com.gestorVentas.Servicio.ProveedoresService;
+import com.gestorVentas.Model.CategoriaProducto;
+import com.gestorVentas.Model.Producto;
+import com.gestorVentas.Model.Proveedor;
+import com.gestorVentas.Service.ProveedoresService;
 
 @Controller
 public class ProveedoresControlador {

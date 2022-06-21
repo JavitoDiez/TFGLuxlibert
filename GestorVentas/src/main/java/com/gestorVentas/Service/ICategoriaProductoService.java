@@ -1,8 +1,8 @@
-package com.gestorVentas.Servicio;
+package com.gestorVentas.Service;
 
 import java.util.List;
 
-import com.gestorVentas.Entidades.CategoriaProducto;
+import com.gestorVentas.Model.CategoriaProducto;
 
 public interface ICategoriaProductoService {
 	

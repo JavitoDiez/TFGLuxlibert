@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gestorVentas.Entidades.AdministradorSistema;
-import com.gestorVentas.Servicio.AdministradorService;
-import com.gestorVentas.Servicio.IAdministrador;
+import com.gestorVentas.Model.AdministradorSistema;
+import com.gestorVentas.Service.AdministradorService;
+import com.gestorVentas.Service.IAdministrador;
 
 @Controller
 public class LoginController {
@@ -33,8 +33,8 @@ public class LoginController {
 		return "index";
 	}
 
-	@GetMapping("/login?error")
-	public String errorLogin(Model model) {
+	/*@GetMapping("/login?error")
+	public String errorLogin(Model model,@RequestParam("error") String param) {
 
 		String error="usuario o contraseña incorrecto";
 		
@@ -42,7 +42,7 @@ public class LoginController {
 		
 		
 		return "login";
-	}
+	}*/
 	
 	
 	@GetMapping("/logout")

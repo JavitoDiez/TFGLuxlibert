@@ -1,11 +1,11 @@
-package com.gestorVentas.Servicio;
+package com.gestorVentas.Service;
 
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.gestorVentas.Entidades.AdministradorSistema;
+import com.gestorVentas.Model.AdministradorSistema;
 
 @Repository
 public interface IAdministrador  {

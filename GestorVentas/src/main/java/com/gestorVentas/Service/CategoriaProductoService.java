@@ -1,12 +1,12 @@
-package com.gestorVentas.Servicio;
+package com.gestorVentas.Service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gestorVentas.DAO.ICategoriaProducto;
-import com.gestorVentas.Entidades.CategoriaProducto;
+import com.gestorVentas.Model.CategoriaProducto;
+import com.gestorVentas.Repository.ICategoriaProducto;
 
 @Service
 public class CategoriaProductoService implements ICategoriaProductoService {

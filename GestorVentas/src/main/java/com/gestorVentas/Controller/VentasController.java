@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.gestorVentas.Entidades.CategoriaProducto;
-import com.gestorVentas.Entidades.DetalleCompra;
-import com.gestorVentas.Entidades.Producto;
-import com.gestorVentas.Entidades.Venta;
-import com.gestorVentas.Servicio.ProductoService;
-import com.gestorVentas.Servicio.VentasService;
+import com.gestorVentas.Model.CategoriaProducto;
+import com.gestorVentas.Model.DetalleCompra;
+import com.gestorVentas.Model.Producto;
+import com.gestorVentas.Model.Venta;
+import com.gestorVentas.Service.ProductoService;
+import com.gestorVentas.Service.VentasService;
 
 @Controller
 public class VentasController {
@@ -65,6 +65,8 @@ public class VentasController {
 
 			}
 		}
+		List<Producto> listadoProductos = productoService.findAll();
+		model.addAttribute("productos", listadoProductos);
 		return "ventas";
 	} catch (Exception e) {
 		// TODO: handle exception
@@ -127,7 +129,8 @@ public class VentasController {
 				
 				model.addAttribute("ventas", listaVentas.getContent());
 				System.out.println("listaVentas: "+listaVentas.toString());
-				
+				List<Producto> listadoProductos = productoService.findAll();
+				model.addAttribute("productos", listadoProductos);
 
 				
 				return "ventas";

@@ -1,4 +1,4 @@
-package com.gestorVentas.DAO;
+package com.gestorVentas.Repository;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.gestorVentas.Entidades.CategoriaProducto;
-import com.gestorVentas.Entidades.Producto;
+import com.gestorVentas.Model.CategoriaProducto;
+import com.gestorVentas.Model.Producto;
 
 @Repository
 public interface IProductosRepository extends JpaRepository<Producto, Integer>{

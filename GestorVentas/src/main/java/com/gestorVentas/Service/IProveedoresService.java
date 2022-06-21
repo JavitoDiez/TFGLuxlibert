@@ -1,10 +1,10 @@
-package com.gestorVentas.Servicio;
+package com.gestorVentas.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.gestorVentas.Entidades.Producto;
-import com.gestorVentas.Entidades.Proveedor;
+import com.gestorVentas.Model.Producto;
+import com.gestorVentas.Model.Proveedor;
 
 public interface IProveedoresService {
 

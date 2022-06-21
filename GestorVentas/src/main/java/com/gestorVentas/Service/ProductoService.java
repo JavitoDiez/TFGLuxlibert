@@ -1,4 +1,4 @@
-package com.gestorVentas.Servicio;
+package com.gestorVentas.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,8 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.gestorVentas.DAO.IProductosRepository;
-import com.gestorVentas.Entidades.Producto;
+import com.gestorVentas.Model.Producto;
+import com.gestorVentas.Repository.IProductosRepository;
 
 @Service
 public class ProductoService implements IProductoService{

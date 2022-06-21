@@ -1,13 +1,14 @@
 body {
-  background-color: white;
   
   font-family: "Open Sans", sans-serif;
   color: #333333;
+  background-image: URL(../img/setUp.jpeg);
+  background-size: cover;
 }
 
 .box-form {
   margin: 0 auto;
-  width: 80%;
+  width: 70%;
   background: #FFFFFF;
   border-radius: 10px;
   overflow: hidden;
@@ -15,7 +16,7 @@ body {
   flex: 1 1 100%;
   align-items: stretch;
   justify-content: space-between;
-  box-shadow: 0 0 20px 6px #090b6f85;
+  box-shadow: 0 0 20px 6px #EEC373;
 }
 @media (max-width: 980px) {
   .box-form {
@@ -30,7 +31,7 @@ body {
 }
 .box-form .left {
   color: #FFFFFF;
-  background-image:url(static/img/logoLuxlibert.jpeg);
+  background-image:url(../img/logoLuxlibert.jpeg);
   
   background-repeat: no-repeat;
   overflow: hidden;
@@ -39,7 +40,8 @@ body {
   padding: 30px;
   width: 100%;
   height: 100%;
-  background-image: URL(../img/carteraDubai.jpeg);
+  background-image: URL(../img/setUp2.jpeg);
+  background-size:cover;
   background-repeat: no-repeat;
   
   overflow: hidden;
@@ -57,7 +59,9 @@ body {
   font-weight: 900;
 }
 
-
+.nombre{
+	color: #EEC373;
+}
 .box-form .right {
   padding: 40px;
   overflow: hidden;
@@ -108,6 +112,7 @@ body {
   outline: 0;
   box-shadow: 0px 4px 20px 0px #EEC373;
   background-image: linear-gradient(135deg, #EEC373 10%, #EEC373 100%);
+  text-align: center;
 }
 
 label {

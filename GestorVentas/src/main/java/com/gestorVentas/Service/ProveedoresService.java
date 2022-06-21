@@ -1,4 +1,4 @@
-package com.gestorVentas.Servicio;
+package com.gestorVentas.Service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gestorVentas.DAO.IProveedorRepository;
-import com.gestorVentas.Entidades.Producto;
-import com.gestorVentas.Entidades.Proveedor;
+import com.gestorVentas.Model.Producto;
+import com.gestorVentas.Model.Proveedor;
+import com.gestorVentas.Repository.IProveedorRepository;
 
 @Service
 public class ProveedoresService implements IProveedoresService{

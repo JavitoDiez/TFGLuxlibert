@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gestorVentas.Entidades.DetalleCompra;
-import com.gestorVentas.Entidades.Producto;
-import com.gestorVentas.Entidades.Venta;
-import com.gestorVentas.Servicio.DetalleCompraService;
-import com.gestorVentas.Servicio.ProductoService;
-import com.gestorVentas.Servicio.VentasService;
+import com.gestorVentas.Model.DetalleCompra;
+import com.gestorVentas.Model.Producto;
+import com.gestorVentas.Model.Venta;
+import com.gestorVentas.Service.DetalleCompraService;
+import com.gestorVentas.Service.ProductoService;
+import com.gestorVentas.Service.VentasService;
 
 @Controller
 public class EstadisticaController {

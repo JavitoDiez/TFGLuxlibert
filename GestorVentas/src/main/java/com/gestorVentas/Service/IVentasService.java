@@ -1,4 +1,4 @@
-package com.gestorVentas.Servicio;
+package com.gestorVentas.Service;
 
 import java.util.Date;
 import java.util.List;
@@ -7,8 +7,7 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-
-import com.gestorVentas.Entidades.Venta;
+import com.gestorVentas.Model.Venta;
 
 public interface IVentasService {
 

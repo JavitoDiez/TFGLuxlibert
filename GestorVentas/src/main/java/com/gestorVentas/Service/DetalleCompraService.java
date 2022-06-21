@@ -1,4 +1,4 @@
-package com.gestorVentas.Servicio;
+package com.gestorVentas.Service;
 
 import java.sql.Date;
 import java.util.HashMap;
@@ -9,11 +9,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gestorVentas.DAO.IDetalleCompra;
-
-import com.gestorVentas.Entidades.DetalleCompra;
-import com.gestorVentas.Entidades.Producto;
-import com.gestorVentas.Entidades.Proveedor;
+import com.gestorVentas.Model.DetalleCompra;
+import com.gestorVentas.Model.Producto;
+import com.gestorVentas.Model.Proveedor;
+import com.gestorVentas.Repository.IDetalleCompra;
 
 @Service
 public class DetalleCompraService implements IDetalleCompraService {
